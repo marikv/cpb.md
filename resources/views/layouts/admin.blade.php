@@ -23,8 +23,30 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector:'.textarea-with-tinymce',
+	        plugins: [
+		        "advlist autolink lists link image charmap print preview anchor",
+		        "searchreplace visualblocks code fullscreen",
+		        "insertdatetime media table paste"
+	        ],
+	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+		    height : 500
+        });
+    </script>
 </head>
 <body>
+
+
+
+    <div id="spinner" style="display: none;" class="spinner__wrapper">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -56,7 +78,11 @@
                         @else
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin/global/settings">Global settings</a>
+                                <a class="nav-link" href="/admin/page/landing">Pagina Principala</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/global/settings">Settings</a>
                             </li>
 
                             <li class="nav-item dropdown">

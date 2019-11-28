@@ -38,11 +38,6 @@
 			return {
 				index: null,
 				images: [
-					'/img/gallery/1-min.JPG',
-					'/img/gallery/2-min.JPG',
-					'/img/gallery/3-min.JPG',
-					'/img/gallery/4-min.jpg',
-					'/img/gallery/5-min.jpg',
 				],
 			};
 		},

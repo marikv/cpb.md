@@ -20,10 +20,33 @@ Vue.use(VueScrollTo, {
 	y: true
 });
 
+import News from './components/News';
+import LandingPage from './components/LandingPage';
+
+
 Vue.use(VueRouter);
+const router = new VueRouter({
+	routes:[
+		{
+			path: '/',
+			component: LandingPage,
+		},
+		{
+			path: '/news',
+			component: News,
+		},
+		{
+			path: '*',
+			redirect: '/404',
+		}
+	]
+});
+Vue.router = router;
+
 Vue.use(VueAxios, axios);
 
 axios.defaults.baseURL = '';
 
+App.router = Vue.router;
 App.store = store;
 new Vue(App).$mount('#app');

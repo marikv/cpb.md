@@ -43,14 +43,8 @@
 				
 				<div class="footer__content">
 					<div class="footer__content-100" style="margin-bottom: 15px;">
-						or. Bălți, str.Stefan cel Mare 57<br>
-						<span style="color: #ececec">(mag. PPT, rest. Monro)</span>
+						or. Bălți, str.Stefan cel Mare 17
 					</div>
-					<div class="footer__content-100">
-						or. Bălți, str.Stefan cel Mare 2<br>
-						<span style="color: #ececec">(spatele oprirei autogara)</span>
-					</div>
-					
 					
 					<div class="footer__langs-container">
 						<div class="footer__lang-item" :class="{'active': lang === 'ro'}" @click="setLang('ro')"><img class="flag" src="/img/ro.svg"></div>
@@ -64,37 +58,17 @@
 				<div v-else class="footer__title">Contacte</div>
 				<div class="footer__content">
 					<div class="footer__content-100">
-						<a href="tel:+37323185858">
-							0(231) 8-58-58
-						</a>
-					</div>
-					<div class="footer__content-100">
-						<a href="tel:+37323189058">
-							0(231) 8-90-58
-						</a>
-					</div>
-					<div class="footer__content-100">
-						<a href="tel:+373068288870">
-							068288870
-						</a>
-					</div>
-					<div class="footer__content-100">
-						<a href="tel:+068288849">
-							068288849
-						</a>
-					</div>
-					<div class="footer__content-100">
-						<a href="mailto:creditboxmd@gmail.com">
-							creditboxmd@gmail.com
+						<a href="tel:+37323122222">
+							0(231) 2-22-22
 						</a>
 					</div>
 					<div class="footer__content-100">
 						<a href="mailto:creditbox.cereri@gmail.com">
-							creditbox.cereri@gmail.com
+							info@cpb.md
 						</a>
 					</div>
 					<div class="footer__content-100">
-						<a class="a-img" href="https://www.facebook.com/creditboxmd/" target="_blank">
+						<a class="a-img" href="https://www.facebook.com/cpbmd/" target="_blank">
 							<img src="/img/facebook.svg" style="height: 30px;">
 						</a>
 					</div>
@@ -181,7 +155,7 @@
 		margin: 2px;
 	}
 	footer {
-		background: #4cbc09;
+		background: #bc1c39;
 		color: white;
 		padding: 50px 20px 80px 20px;
 	}

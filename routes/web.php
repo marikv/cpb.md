@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts/landing');
-});
+//Route::get('/', function () {
+//    return view('layouts/landing');
+//});
+Route::get('/', 'HomeController@landingPage')->name('landingPage');
+Route::get('/ro', 'HomeController@landingPageRo')->name('landingPageRo');
+Route::get('/ru', 'HomeController@landingPageRu')->name('landingPageRu');
+Route::get('/en', 'HomeController@landingPageEn')->name('landingPageEn');
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -26,4 +30,7 @@ Route::get('/adm', 'AdminController@index')->name('adm');
 Route::get('/register', 'AdminController@index')->name('registerAdmin');
 Route::get('/home', 'AdminController@index')->name('homeAdmin');
 Route::get('/admin/global/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
+Route::get('/admin/page/landing', 'AdminController@landingPage')->name('landingPageAdmin');
 //Route::post('/cerere/send', 'HomeController@sendCerere');
+Route::post('/files/upload/image', 'AdminController@uploadImage')->name('uploadImage');
+Route::post('/settings/save', 'AdminController@saveSettings')->name('saveSettings');

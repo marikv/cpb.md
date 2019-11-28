@@ -1,57 +1,26 @@
 <template>
-	<div style="position: relative">
+	<div style="position: absolute; z-index: 2;width: 100%;">
 		
 		<div class="top-header">
 			<div class="container">
 				<div class="flex" style="justify-content: space-between;">
 					<div class="logo">
-						<a href="/">
-							<img src="/img/logo_box_mini.png" alt="Credit Box">
+						<a v-if="logoSrc" href="/">
+							<img :src="logoSrc" alt="">
 						</a>
-						<a href="/" class="logo-text">CPB</a>
+						<a v-if="logoText" href="/" class="logo-text">{{logoText}}</a>
 					</div>
 					<div class="phones">
-						<a href="tel:+37323185858">
-							0(231) 8-58-58
+						<a v-if="phone1" :href="`tel:${phone1}`">
+							{{phone1}}
 						</a>
-						<a href="tel:+37323189058">
-							0(231) 8-90-58
+						<a v-if="phone2" :href="`tel:${phone2}`">
+							{{phone2}}
 						</a>
 					</div>
 					<div class="site-navbar">
 						<nav class="site-navigation position-relative text-right" role="navigation">
-							<ul class="site-menu">
-								<li>
-									<a href="#calculator-section" v-scroll-to="{el: '#calculator-section'}">
-										<span v-if="lang === 'ru'">Калькулятор</span>
-										<span v-else>Calculator</span>
-									</a>
-								</li>
-								<li>
-									<a href="#cerere-online" v-scroll-to="{el: '#cerere-online'}">
-										<span v-if="lang === 'ru'">Онлайн заявка</span>
-										<span v-else>Cerere Online</span>
-									</a>
-								</li>
-								<li>
-									<a href="#faq-section" v-scroll-to="{el: '#faq-section'}">FAQ</a>
-								</li>
-								<li>
-									<a href="#footer" v-scroll-to="{el: '#footer'}">
-										<span v-if="lang === 'ru'">Контакты</span>
-										<span v-else>Contacte</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:void(0)" @click.stop.prevent="showLangs=!showLangs">
-										<div class="lang-item"><img class="flag" :src="`/img/${lang}.svg`"> {{langName}}</div>
-									</a>
-									<div class="langs-container" v-show="showLangs">
-										<div class="lang-item" v-show="lang!=='ro'" @click="setLang('ro')"><img class="flag" src="/img/ro.svg"> Ro</div>
-										<div class="lang-item" v-show="lang!=='ru'" @click="setLang('ru')"><img class="flag" src="/img/ru.svg"> Ру</div>
-									</div>
-								</li>
-							</ul>
+							<menuComponent id="menuDesktop"></menuComponent>
 						</nav>
 					</div>
 					
@@ -61,38 +30,7 @@
 							<span></span>
 							<span></span>
 							<span></span>
-							<ul id="menuMobile">
-								<li>
-									<a href="#calculator-section" v-scroll-to="{el: '#calculator-section'}">
-										<span v-if="lang === 'ru'">Калькулятор</span>
-										<span v-else>Calculator</span>
-									</a>
-								</li>
-								<li>
-									<a href="#cerere-online" v-scroll-to="{el: '#cerere-online'}">
-										<span v-if="lang === 'ru'">Онлайн заявка</span>
-										<span v-else>Cerere Online</span>
-									</a>
-								</li>
-								<li>
-									<a href="#faq-section" v-scroll-to="{el: '#faq-section'}">FAQ</a>
-								</li>
-								<li>
-									<a href="#footer" v-scroll-to="{el: '#footer'}">
-										<span v-if="lang === 'ru'">Контакты</span>
-										<span v-else>Contacte</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:void(0)" @click.stop.prevent="showLangs=!showLangs">
-										<div class="lang-item"><img class="flag" :src="`/img/${lang}.svg`"> {{langName}}</div>
-									</a>
-									<div class="langs-container" v-show="showLangs">
-										<div class="lang-item" v-show="lang!=='ro'" @click="setLang('ro')"><img class="flag" src="/img/ro.svg"> Ro</div>
-										<div class="lang-item" v-show="lang!=='ru'" @click="setLang('ru')"><img class="flag" src="/img/ru.svg"> Ру</div>
-									</div>
-								</li>
-							</ul>
+							<menuComponent id="menuMobile"></menuComponent>
 						</div>
 					</nav>
 					
@@ -104,31 +42,38 @@
 </template>
 
 <script>
+	import menuComponent from './menu';
 	export default {
+		components: {
+			menuComponent,
+		},
 		data() {
 			return {
-				showLangs: false,
-				//lang: 'ro',
 			};
 		},
 		computed: {
-			langName() {
-				return this.lang === 'ro' ? 'Ro' : 'Ру';
-			},
 			lang() {
 				return this.$store.getters.getLang;
 			},
+			logoSrc() {
+				return window.settingsData.logoImgFile ? `/uploads/${window.settingsData.logoImgFile}` : '';
+			},
+			logoText() {
+				return window.settingsData[`logotext_${this.lang}`];
+			},
+			phone1() {
+				return window.settingsData['phone1'];
+			},
+			phone2() {
+				return window.settingsData['phone2'];
+			},
 		},
 		methods: {
-			setLang(lang) {
-				this.showLangs = false;
-				this.$store.commit('setLang', lang);
-			},
 		},
 	}
 </script>
 
-<style scoped>
+<style>
 	
 	.site-navigation-mobile {
 		display: block;
@@ -154,7 +99,7 @@
 		z-index: 2; /* and place it over the hamburger */
 		-webkit-touch-callout: none;
 	}
-	#menuMobileToggle span{
+	#menuMobileToggle > span{
 		display: block;
 		width: 33px;
 		height: 4px;
@@ -168,10 +113,10 @@
 		background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 		opacity 0.55s ease;
 	}
-	#menuMobileToggle span:first-child {
+	#menuMobileToggle > span:first-child {
 		transform-origin: 0% 0%;
 	}
-	#menuMobileToggle span:nth-last-child(2) {
+	#menuMobileToggle > span:nth-last-child(2) {
 		transform-origin: 0% 100%;
 	}
 	#menuMobileToggle input:checked ~ span {
@@ -220,20 +165,6 @@
 	#menuMobileToggle li > a:hover {
 		color: #4cbc09;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	.top-header {
 		box-shadow: 0px 10px 16px rgba(84, 83, 83, 0.15);
 		/*position: absolute;*/
@@ -261,14 +192,14 @@
 		height: 30px;
 	}
 	.phones {
-		width: 220px;
+		width: 200px;
 		display: flex;
 		flex-wrap: wrap;
 		font-size: 15px;
 		align-items: center;
 		padding-left: 40px;
 		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-bottom: 5px;
 	}
 	.phones a {
 		color: #4cbc09;
@@ -306,27 +237,6 @@
 		display: inline-block;
 	}
 	
-	.flag {
-		height: 14px;
-		margin-right: 5px;
-		border-radius: 3px;
-	}
-	.langs-container {
-		position: absolute;
-		z-index: 3;
-		background: white;
-		padding: 0 20px 10px;
-		border-radius: 10px;
-	}
-	.lang-item {
-		display: flex;
-		align-items: center;
-		cursor: pointer;
-	}
-	.lang-item:hover {
-		color: #4cbc09;
-	}
-	
 	@media (max-width: 550px) {
 		.phones {
 			width: 180px;
@@ -343,8 +253,11 @@
 		}
 		
 		.logo a img {
-			margin-top: 10px;
-			height: 40px;
+			/*margin-top: 10px;*/
+			/*height: 40px;*/
+			position: absolute;
+			top: -20px;
+			height: 130px;
 		}
 		
 		.site-navigation-mobile {

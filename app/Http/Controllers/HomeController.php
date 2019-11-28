@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    private const SYSTME_ID = '------';
-    private const PASSWORD = '------';
-    private const SENDER_NAME = '------';
-    private const URL = 'http://api.bulksms.md:8082/UnifunBulkSMSAPI.asmx/SendSMSSimple?username={username}&password={password}&from={sender}&to={msisdn}&text={body}';
 
     /**
      * Create a new controller instance.
@@ -32,15 +30,65 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function landingPage()
+    {
+        $settingsData = Settings::getAll();
+
+        return view('layouts.landing')
+            ->with('settingsData', $settingsData);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function landingPageRu()
+    {
+        self::setLang('ru');
+        return $this->landingPage();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function landingPageRo()
+    {
+        self::setLang('ro');
+        return $this->landingPage();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function landingPageEn()
+    {
+        self::setLang('en');
+        return $this->landingPage();
+    }
+
+    public static function getLang()
+    {
+        $lang = Session::get('lang');
+        if (!$lang) {
+            $lang = 'ro';
+        }
+        return $lang;
+    }
+
+    public static function setLang($lang)
+    {
+        Session::put('lang', $lang);
+    }
+
+
     public function sendCerere(Request $request)
     {
         $phone = $request->phone;
         if ($phone) {
             $mail = 'cpb.md.cereri@gmail.com';
             $phone = '373760000000';
-            // $mail = 'marin.vartan@gmail.com';
-            // $phone = '37376083045';
-
 
             $details = [
                 'title' => 'Aveti o cerere noua',
@@ -52,19 +100,6 @@ class HomeController extends Controller
                 'data_pasaport' => $request->dataPassport,
             ];
             $m = Mail::to($mail)->send(new \App\Mail\SendMailCerere($details));
-
-//            $smsBody = 'Cerere noua pe cpb.md. Deschide '.$mail.' pentru mai multe detalii';
-//
-//            $URL = self::URL;
-//            $URL = str_replace('{username}', self::SYSTME_ID, $URL);
-//            $URL = str_replace('{password}', self::PASSWORD, $URL);
-//            $URL = str_replace('{sender}', self::SENDER_NAME, $URL);
-//            $URL = str_replace('{msisdn}', $phone, $URL);
-//            $URL = str_replace('{body}', $smsBody, $URL);
-//
-//            $client = new \GuzzleHttp\Client();
-//            $request = $client->get($URL);
-//            $response = $request->getBody();
         }
     }
 }
