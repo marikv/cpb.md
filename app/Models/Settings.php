@@ -43,6 +43,7 @@ class Settings extends Model
             'phone2' => '',
             'langing_bg_1' => '',
             'langing_bg_2' => '',
+            'photoForPhotoGallery' => '',
         ];
 
         $defaultWithLangs = ['title', 'keywords', 'description', 'logotext', 'home_section_title', 'home_section_text'];

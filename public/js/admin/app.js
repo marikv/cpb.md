@@ -10,6 +10,9 @@ var saveImage = function(name) {
 		if ($desc.length) {
 			$desc.html('');
 		}
+		if (name === 'photoForPhotoGallery') {
+			document.location.reload();
+		}
 	});
 };
 

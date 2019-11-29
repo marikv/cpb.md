@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -36,8 +37,10 @@ class HomeController extends Controller
     public function landingPage()
     {
         $settingsData = Settings::getAll();
+        $photos = Photo::all();
 
         return view('layouts.landing')
+            ->with('photos', $photos)
             ->with('settingsData', $settingsData);
     }
 

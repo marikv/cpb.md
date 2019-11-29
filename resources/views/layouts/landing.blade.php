@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="shortcut icon" href="{{ $settingsData['ico'] ? '/uploads/'.$settingsData['ico'] : '' }}" type="image/x-icon">
     <script>
 		window.settingsData = [].concat(@json($settingsData))[0];
+		window.photos = [].concat(@json($photos));
     </script>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -30,7 +29,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-{{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
+    {{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=cyrillic" rel="stylesheet">
 
     <!-- Styles -->
@@ -40,6 +39,7 @@
     <div id="app">
 
     </div>
+    <script src="{{ asset('js/TweenMax.min.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

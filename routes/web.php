@@ -31,6 +31,8 @@ Route::get('/register', 'AdminController@index')->name('registerAdmin');
 Route::get('/home', 'AdminController@index')->name('homeAdmin');
 Route::get('/admin/global/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
 Route::get('/admin/page/landing', 'AdminController@landingPage')->name('landingPageAdmin');
+Route::get('/admin/page/photo-gallery', 'AdminController@photoGallery')->name('photoGalleryAdmin');
 //Route::post('/cerere/send', 'HomeController@sendCerere');
 Route::post('/files/upload/image', 'AdminController@uploadImage')->name('uploadImage');
 Route::post('/settings/save', 'AdminController@saveSettings')->name('saveSettings');
+Route::post('/photo-gallery/delete', 'AdminController@deleteFromPhotoGallery')->name('deleteFromPhotoGallery');

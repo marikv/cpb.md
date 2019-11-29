@@ -6,6 +6,11 @@ import VueScrollTo from 'vue-scrollto';
 import App from './App.vue';
 import store from './store';
 
+import VueGlide from 'vue-glide-js';
+import 'vue-glide-js/dist/vue-glide.css';
+Vue.use(VueGlide);
+
+
 Vue.use(VueScrollTo, {
 	container: "body",
 	duration: 500,

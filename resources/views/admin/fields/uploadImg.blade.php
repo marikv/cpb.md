@@ -13,7 +13,7 @@
 </style>
 
 <form method="post" action="" enctype="multipart/form-data" id="{{ $filedName }}Form">
-    <img src="/uploads/{{ $settingsData[$filedName] }}" id="{{ $filedName }}Img" height="70">
+    <img src="/uploads/{{ $settingsData[$filedName] ?: 'no-image.png' }}" id="{{ $filedName }}Img" height="70">
     <input type="file" id="{{ $filedName }}" name="file" />
     <input type="hidden" id="{{ $filedName }}Hidden" value="{{ $settingsData[$filedName] }}" />
     <div id="{{ $filedName }}Desc"></div>

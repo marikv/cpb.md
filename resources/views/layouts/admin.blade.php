@@ -82,6 +82,10 @@
                             </li>
 
                             <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/photo-gallery">Galerie Foto</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="/admin/global/settings">Settings</a>
                             </li>
 
