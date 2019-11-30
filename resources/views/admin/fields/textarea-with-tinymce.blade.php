@@ -10,22 +10,11 @@
         min-height: 100px;
     }
     #{{ $filedName }}Button{
-        height: 30px;
+        height: 40px;
     }
 </style>
 
 <div style="width: 100%;">
     <textarea rows="13" style="height: 500px" id="{{ $filedName }}" name="{{ $filedName }}" class="textarea-with-tinymce" >{{ $settingsData[$filedName] }}</textarea>
-    <input onclick="saveTextTinyMce('{{ $filedName }}')" type="button" id="{{ $filedName }}Button" value="Save" />
+    <input onclick="saveTextTinyMce('{{ $filedName }}')" type="button" id="{{ $filedName }}Button" class="btn btn-primary" value="Save" />
 </div>
-
-<script>
-setTimeout(() => {
-	var cl = '.tox.tox-silver-sink.tox-tinymce-aux > .tox-notifications-container';
-	if (document.querySelectorAll(cl).length) {
-        for (var i = 0; i < document.querySelectorAll(cl).length; i ++) {
-	        document.querySelectorAll(cl)[i].style.display = 'none';
-        }
-    }
-}, 4000);
-</script>

@@ -39,3 +39,18 @@ var saveSettings = function (name, value, callbackSuccess, callbackError) {
 		}
 	})
 };
+
+
+var iter = 0;
+var interv = setInterval(() => {
+	var cl = '.tox.tox-silver-sink.tox-tinymce-aux > .tox-notifications-container';
+	if (document.querySelectorAll(cl).length) {
+		for (var i = 0; i < document.querySelectorAll(cl).length; i ++) {
+			document.querySelectorAll(cl)[i].style.display = 'none';
+		}
+	}
+	iter++;
+	if (iter >= 40) {
+		clearInterval(interv);
+	}
+}, 500);

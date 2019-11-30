@@ -13,12 +13,18 @@
 </style>
 
 <form method="post" action="" enctype="multipart/form-data" id="{{ $filedName }}Form">
-    <img src="/uploads/{{ $settingsData[$filedName] ?: 'no-image.png' }}" id="{{ $filedName }}Img" height="70">
-    <input type="file" id="{{ $filedName }}" name="file" />
+    <img src="/uploads/{{ $settingsData[$filedName] ?: 'no-image.png' }}" id="{{ $filedName }}Img" height="90">
+
+        <label for="{{ $filedName }}" class="btn btn-primary">Alege o imagine</label>
+        <input type="file" id="{{ $filedName }}" name="file"  >
+
     <input type="hidden" id="{{ $filedName }}Hidden" value="{{ $settingsData[$filedName] }}" />
     <div id="{{ $filedName }}Desc"></div>
 </form>
-<input onclick="saveImage('{{ $filedName }}')" type="button" id="{{ $filedName }}Button" disabled="disabled" value="Save" />
+<input onclick="saveImage('{{ $filedName }}')"
+       type="button"
+       class="btn btn-primary"
+       id="{{ $filedName }}Button" disabled="disabled" value="Save" />
 
 <script>
 	$(document).ready(function(){

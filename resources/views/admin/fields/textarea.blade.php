@@ -10,11 +10,11 @@
         min-height: 100px;
     }
     #{{ $filedName }}Button{
-        height: 30px;
+        height: 40px;
     }
 </style>
 
 <div style="display: flex;flex-wrap: wrap;width: 100%;">
     <textarea id="{{ $filedName }}" name="{{ $filedName }}" >{{ $settingsData[$filedName] }}</textarea>
-    <input onclick="saveText('{{ $filedName }}')" type="button" id="{{ $filedName }}Button" value="Save" />
+    <input onclick="saveText('{{ $filedName }}')" class="btn btn-primary" type="button" id="{{ $filedName }}Button" value="Save" />
 </div>

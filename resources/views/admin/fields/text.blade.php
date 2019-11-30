@@ -14,5 +14,5 @@
 
 <div style="display: flex;flex-wrap: wrap;width: 100%;">
     <input type="text" id="{{ $filedName }}" name="{{ $filedName }}" value="{{ $settingsData[$filedName] }}" />
-    <input onclick="saveText('{{ $filedName }}')" type="button" id="{{ $filedName }}Button" value="Save" />
+    <input onclick="saveText('{{ $filedName }}')" class="btn btn-primary" type="button" id="{{ $filedName }}Button" value="Save" />
 </div>

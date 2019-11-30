@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Photo;
+use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -61,6 +63,108 @@ class AdminController extends Controller
         return view('admin.photoGallery')
             ->with('photos', $photos)
             ->with('settingsData', $settingsData);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function productsPage(Request $request)
+    {
+        $categoriesData = Category::all();
+        $productsData = Product::all();
+        $categoryEdit = new \stdClass();
+        $productEdit = new \stdClass();
+
+        $cat = $request->get('category');
+        if (!empty($cat)) {
+            $productsData = Product::where('category_id', $cat)->get();
+            $categoryEdit = Category::find($cat);
+        }
+
+        $prod = $request->get('product');
+        if (!empty($prod)) {
+            $productEdit = Product::find($prod);
+        }
+
+        return view('admin.productsPage')
+            ->with('edit', !empty($request->get('edit')))
+            ->with('productEdit', $productEdit)
+            ->with('categoryEdit', $categoryEdit)
+            ->with('productsData', $productsData)
+            ->with('categoriesData', $categoriesData);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addProductCategory(Request $request)
+    {
+        if ($request->cat_id) {
+            $model = Category::find($request->cat_id);
+        } else {
+            $model = new Category();
+        }
+
+        $model->name_ro = $request->cat_nume_ro;
+        $model->name_ru = $request->cat_nume_ru;
+        $model->name_en = $request->cat_nume_en;
+        $model->save();
+
+        return redirect('/admin/page/products?category=' . $model->id);
+    }
+
+    public function deleteProductCategory(Request $request)
+    {
+        if ($request->id) {
+            $model = \App\Models\Category::find($request->id);
+            $delete = $model->delete();
+        }
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        if ($request->id) {
+            $model = \App\Models\Product::find($request->id);
+            $delete = $model->delete();
+        }
+    }
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addProduct(Request $request)
+    {
+        if ($request->id) {
+            $model = Product::find($request->id);
+        } else {
+            $model = new Product();
+        }
+
+        if($request->file('photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'.'.$request->file('photo')->extension();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+
+        $model->category_id = $request->category_id;
+
+        $model->name_ro = $request->name_ro;
+        $model->name_ru = $request->name_ru;
+        $model->name_en = $request->name_en;
+
+        $model->text_ro = $request->text_ro;
+        $model->text_ru = $request->text_ru;
+        $model->text_en = $request->text_en;
+
+        $model->save();
+
+        return redirect('/admin/page/products?product=' . $model->id .'&edit=1');
     }
 
 

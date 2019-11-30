@@ -86,7 +86,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin/global/settings">Settings</a>
+                                <a class="nav-link" href="/admin/page/products">Producția</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/settings">Settings</a>
                             </li>
 
                             <li class="nav-item dropdown">

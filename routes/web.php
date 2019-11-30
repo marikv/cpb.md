@@ -29,10 +29,18 @@ Auth::routes();
 Route::get('/adm', 'AdminController@index')->name('adm');
 Route::get('/register', 'AdminController@index')->name('registerAdmin');
 Route::get('/home', 'AdminController@index')->name('homeAdmin');
-Route::get('/admin/global/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
+
+
+Route::get('/admin/page/products', 'AdminController@productsPage')->name('productsPage');
+Route::get('/admin/page/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
 Route::get('/admin/page/landing', 'AdminController@landingPage')->name('landingPageAdmin');
 Route::get('/admin/page/photo-gallery', 'AdminController@photoGallery')->name('photoGalleryAdmin');
-//Route::post('/cerere/send', 'HomeController@sendCerere');
+
+
+Route::post('/admin/category/delete', 'AdminController@deleteProductCategory')->name('deleteProductCategory');
+Route::post('/admin/category/add', 'AdminController@addProductCategory')->name('addProductCategory');
+Route::post('/admin/product/delete', 'AdminController@deleteProduct')->name('deleteProduct');
+Route::post('/admin/product/add', 'AdminController@addProduct')->name('addProduct');
 Route::post('/files/upload/image', 'AdminController@uploadImage')->name('uploadImage');
 Route::post('/settings/save', 'AdminController@saveSettings')->name('saveSettings');
 Route::post('/photo-gallery/delete', 'AdminController@deleteFromPhotoGallery')->name('deleteFromPhotoGallery');
