@@ -77,12 +77,25 @@
                             @endif
                         @else
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/page/landing">Pagina Principala</a>
-                            </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/page/photo-gallery">Galerie Foto</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown"
+                                   class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                >
+                                    Pagina Principala <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/admin/page/landing">Top section</a>
+                                    <a class="dropdown-item" href="/admin/page/photo-gallery">Foto Galerie</a>
+                                    <a class="dropdown-item" href="/admin/page/video-gallery">Video Galerie</a>
+                                    <a class="dropdown-item" href="/admin/page/faq">FAQ</a>
+                                </div>
                             </li>
 
                             <li class="nav-item">

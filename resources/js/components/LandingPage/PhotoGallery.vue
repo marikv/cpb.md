@@ -1,27 +1,35 @@
 <template>
 	<div>
-		<div id="PhotoGallery" v-if="images.length">
+		<div id="PhotoGallery" v-show="images.length > 0 || videos.length > 0">
 			
 			<h1>
-				<span v-if="lang === 'ru'">Фото галерея</span>
-				<span v-if="lang === 'ro'">Galerie Foto</span>
-				<span v-if="lang === 'en'">Photo Gallery</span>
+				<span v-if="lang === 'ru'">Фото/Видео галерея</span>
+				<span v-if="lang === 'ro'">Galerie Foto/Video</span>
+				<span v-if="lang === 'en'">Photo/Video Gallery</span>
 			</h1>
 			
-			<Gallery :images="images" :index="index" @close="index = null"></Gallery>
+			<Gallery :images="galleryItems"
+			         :index="index"
+			         :options="galleryOptions"
+			         @close="index = null"></Gallery>
 			
 			<vue-glide
+					v-if="images.length > 0"
+					:type="'slider'"
+					:start-at="0"
+					:bound="true"
 					:focus-at="0"
 					:rewind="false"
 					:perView="perView"
+					:bullet="true"
 			>
 				<vue-glide-slide
 						v-for="(image, i) in images"
 						:key="i"
 				>
-					<div	class="image"
-							@click="index = i"
-							:style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
+					<div	class="slide-image"
+					        @click="gallery(imagesArray, i, 'images')"
+							:style="{ backgroundImage: 'url(/uploads/' + image.path + ')', width: `${imageWidth}px`, height: `${(imageWidth * 6 / 9)}px` }"
 					></div>
 				</vue-glide-slide>
 				
@@ -35,7 +43,37 @@
 				</template>
 			</vue-glide>
 			
-			<div style="clear: both; height: 70px;"></div>
+			
+			
+			<vue-glide
+					v-if="videos.length > 0"
+					:start-at="0"
+					:bound="true"
+					:type="'slider'"
+					:focus-at="0"
+					:rewind="false"
+					:perView="perViewVideo"
+					:bullet="true"
+			>
+				<vue-glide-slide
+						v-for="(video, i) in videos"
+						:key="i"
+				>
+					<div	class="slide-image"
+					        @click="gallery(videos, i, 'video')"
+					        :style="{ backgroundImage: 'url(' + video.poster + ')', width: `${videoWidth}px`, height: `${(videoWidth * 6 / 9)}px`  }"
+					></div>
+				</vue-glide-slide>
+				
+				<template slot="control">
+					<button data-glide-dir="<">
+						<img src="/img/arrow-left.svg" height="34px">
+					</button>
+					<button data-glide-dir=">">
+						<img src="/img/arrow-right.svg" height="34px">
+					</button>
+				</template>
+			</vue-glide>
 		
 		</div>
 	</div>
@@ -56,7 +94,24 @@
 		},
 		data() {
 			return {
+				videoWidth: 400,
+				imageWidth: 300,
 				index: null,
+				youTubeOptions: {
+					// The list object property (or data attribute) with the YouTube video id:
+					youTubeVideoIdProperty: 'youtube',
+					// Optional object with parameters passed to the YouTube video player:
+					// https://developers.google.com/youtube/player_parameters
+					youTubePlayerVars: {
+						autoplay: 1,
+						controls: 1,
+					},
+					// Require a click on the native YouTube player for the initial playback:
+					youTubeClickToPlay: false,
+				},
+				imageOptions: {},
+				galleryOptions: {},
+				galleryItems: [],
 			};
 		},
 		computed: {
@@ -64,7 +119,23 @@
 				return this.$store.getters.getLang;
 			},
 			images() {
-				return window.photos.length ? window.photos.map(item => `/uploads/${item.path}`) : [];
+				return window.photos.length ? window.photos.filter(item => item.type === 0).map(item => {
+					item.pathMini =  item.path.substring(0, item.path.lastIndexOf(".")) + "_mini" + item.path.substring(item.path.lastIndexOf("."));
+					return item;
+				}) : [];
+			},
+			imagesArray() {
+				return this.images.map(item => `/uploads/${item.path}`);
+			},
+			videos() {
+				return window.photos.length ? window.photos.filter(item => item.type === 1).map(item => {
+					item.youtube = this.getYoutubeIdFromLink(item.path);
+					item.type = 'text/html';
+					item.href = item.path;
+					item.title = '';
+					item.poster = `https://img.youtube.com/vi/${item.youtube}/0.jpg`;
+					return item;
+				}) : [];
 			},
 			perView() {
 				if (this.images) {
@@ -72,8 +143,28 @@
 				}
 				return 0;
 			},
+			perViewVideo() {
+				if (this.images) {
+					return Math.floor(window.innerWidth / 420);
+				}
+				return 0;
+			},
 		},
 		methods: {
+			gallery(videos, i, type){
+				this.index = i;
+				this.galleryItems = videos;
+				if (type === 'videos'){
+					this.galleryOptions = this.youTubeOptions;
+				} else {
+					this.galleryOptions = this.imageOptions;
+				}
+			},
+			getYoutubeIdFromLink(url){
+				const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+				const match = url.match(regExp);
+				return (match && match[7].length === 11)? match[7] : false;
+			}
 		},
 		mounted() {
 
@@ -82,68 +173,7 @@
 </script>
 
 <style>
-	#PhotoGallery {
-		text-align: center;
-	}
-	.glide div[data-glide-el="controls"] {
-		position: absolute;
-		top: 50%;
-		width: 100%;
-	}
-	.glide div[data-glide-el="controls"] button:active,
-	.glide div[data-glide-el="controls"] button:focus {
-		outline: none;
-	}
-	.glide div[data-glide-el="controls"] button {
-		position: absolute;
-		top: 50%;
-		width: 40px;
-		height: 40px;
-		margin-top: -23px;
-		font-size: 60px;
-		font-weight: 100;
-		line-height: 30px;
-		text-decoration: none;
-		text-align: center;
-		background: rgba(0, 0, 0, 0.43);
-		box-sizing: content-box;
-		border: 2px solid #fff;
-		border-radius: 33px;
-		opacity: .5;
-		cursor: pointer;
-		padding: 10px;
-	}
-	.glide div[data-glide-el="controls"] button:hover {
-		opacity: .8;
-	}
-	.glide div[data-glide-el="controls"] button[data-glide-dir=">"] {
-		right: 10px;
-	}
-	.glide div[data-glide-el="controls"] button[data-glide-dir="<"] {
-		left: 10px;
-	}
-	.image {
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		border: 1px solid rgba(226, 225, 225, 0.63);
-		margin: 10px auto;
-		border-radius: 4px;
-		cursor: pointer;
-		transition: transform 0.2s;
-		-webkit-transition: -webkit-transform 0.2s;
-	}
-	.image:hover {
-		transform: scale(1.1);
-		-webkit-transform: scale(1.1);
-	}
-	h1 {
-		padding: 40px 0 25px 0;
-	}
-	.thumbs {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: nowrap;
+	.slide-image {
+		box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.31);
 	}
 </style>

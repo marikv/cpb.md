@@ -35,6 +35,7 @@ Route::get('/admin/page/products', 'AdminController@productsPage')->name('produc
 Route::get('/admin/page/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
 Route::get('/admin/page/landing', 'AdminController@landingPage')->name('landingPageAdmin');
 Route::get('/admin/page/photo-gallery', 'AdminController@photoGallery')->name('photoGalleryAdmin');
+Route::get('/admin/page/video-gallery', 'AdminController@videoGallery')->name('videoGalleryAdmin');
 
 
 Route::post('/admin/category/delete', 'AdminController@deleteProductCategory')->name('deleteProductCategory');

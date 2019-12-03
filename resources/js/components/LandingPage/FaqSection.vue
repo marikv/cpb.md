@@ -1,9 +1,10 @@
 <template>
-    <div id="faq-section" class="faq__wrapper">
+    <div id="faq-section" class="faq__wrapper home-section__wrapper">
         <div class="container">
             
             <h1  v-if="lang === 'ru'">Вопросы и ответы</h1>
             <h1  v-if="lang === 'ro'">Întrebări și răspunsuri</h1>
+            <h1  v-if="lang === 'en'">FAQ</h1>
             
             <div class="accordion">
                 <div

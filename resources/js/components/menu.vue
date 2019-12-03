@@ -8,7 +8,14 @@
 				</router-link>
 			</li>
 			<li>
-				<a href="/catalog">
+				<a href="/#PhotoGallery" v-scroll-to="{el: '#PhotoGallery'}">
+					<span v-if="lang === 'ru'">Наша галерея</span>
+					<span v-if="lang === 'ro'">Galeria Nostră</span>
+					<span v-if="lang === 'en'">Our Gallery</span>
+				</a>
+			</li>
+			<li>
+				<a href="/#products">
 					<span v-if="lang === 'ru'">Каталог</span>
 					<span v-if="lang === 'ro'">Catalog</span>
 					<span v-if="lang === 'en'">Catalogue</span>
@@ -21,15 +28,6 @@
 					<span v-if="lang === 'en'">News</span>
 				</router-link>
 			</li>
-<!--			<li>-->
-<!--				<a href="#cerere-online" v-scroll-to="{el: '#cerere-online'}">-->
-<!--					<span v-if="lang === 'ru'">Онлайн заявка</span>-->
-<!--					<span v-else>Cerere Online</span>-->
-<!--				</a>-->
-<!--			</li>-->
-<!--			<li>-->
-<!--				<a href="#faq-section" v-scroll-to="{el: '#faq-section'}">FAQ</a>-->
-<!--			</li>-->
 			<li>
 				<a href="#footer" v-scroll-to="{el: '#footer'}">
 					<span v-if="lang === 'ro'">Contacte</span>
@@ -102,6 +100,6 @@
 		cursor: pointer;
 	}
 	.lang-item:hover {
-		color: #4cbc09;
+		color: #003176;
 	}
 </style>

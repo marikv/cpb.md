@@ -2066,6 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
       return window.settingsData["logotext_".concat(this.lang)];
     },
     phone1: function phone1() {
+      console.log(window.settingsData['phone1']);
       return window.settingsData['phone1'];
     },
     phone2: function phone2() {
@@ -2164,6 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2322,7 +2324,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateScroll: function updateScroll() {
       this.scrollPosition = window.scrollY;
-      console.log(this.scrollPosition);
+      var topHeader = document.getElementById('topHeader');
+      var h = topHeader.offsetHeight;
+
+      if (this.scrollPosition > 330) {
+        topHeader.style.position = 'fixed';
+      } else {
+        topHeader.style.position = 'absolute';
+      }
     }
   },
   mounted: function mounted() {
@@ -2404,6 +2413,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2413,7 +2460,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, _defineProperty(_components, vue_glide_js__WEBPACK_IMPORTED_MODULE_1__["Glide"].name, vue_glide_js__WEBPACK_IMPORTED_MODULE_1__["Glide"]), _defineProperty(_components, vue_glide_js__WEBPACK_IMPORTED_MODULE_1__["GlideSlide"].name, vue_glide_js__WEBPACK_IMPORTED_MODULE_1__["GlideSlide"]), _components),
   data: function data() {
     return {
-      index: null
+      videoWidth: 400,
+      imageWidth: 300,
+      index: null,
+      youTubeOptions: {
+        // The list object property (or data attribute) with the YouTube video id:
+        youTubeVideoIdProperty: 'youtube',
+        // Optional object with parameters passed to the YouTube video player:
+        // https://developers.google.com/youtube/player_parameters
+        youTubePlayerVars: {
+          autoplay: 1,
+          controls: 1
+        },
+        // Require a click on the native YouTube player for the initial playback:
+        youTubeClickToPlay: false
+      },
+      imageOptions: {},
+      galleryOptions: {},
+      galleryItems: []
     };
   },
   computed: {
@@ -2421,8 +2485,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters.getLang;
     },
     images: function images() {
-      return window.photos.length ? window.photos.map(function (item) {
+      return window.photos.length ? window.photos.filter(function (item) {
+        return item.type === 0;
+      }).map(function (item) {
+        item.pathMini = item.path.substring(0, item.path.lastIndexOf(".")) + "_mini" + item.path.substring(item.path.lastIndexOf("."));
+        return item;
+      }) : [];
+    },
+    imagesArray: function imagesArray() {
+      return this.images.map(function (item) {
         return "/uploads/".concat(item.path);
+      });
+    },
+    videos: function videos() {
+      var _this = this;
+
+      return window.photos.length ? window.photos.filter(function (item) {
+        return item.type === 1;
+      }).map(function (item) {
+        item.youtube = _this.getYoutubeIdFromLink(item.path);
+        item.type = 'text/html';
+        item.href = item.path;
+        item.title = '';
+        item.poster = "https://img.youtube.com/vi/".concat(item.youtube, "/0.jpg");
+        return item;
       }) : [];
     },
     perView: function perView() {
@@ -2431,9 +2517,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return 0;
+    },
+    perViewVideo: function perViewVideo() {
+      if (this.images) {
+        return Math.floor(window.innerWidth / 420);
+      }
+
+      return 0;
     }
   },
-  methods: {},
+  methods: {
+    gallery: function gallery(videos, i, type) {
+      this.index = i;
+      this.galleryItems = videos;
+
+      if (type === 'videos') {
+        this.galleryOptions = this.youTubeOptions;
+      } else {
+        this.galleryOptions = this.imageOptions;
+      }
+    },
+    getYoutubeIdFromLink: function getYoutubeIdFromLink(url) {
+      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      return match && match[7].length === 11 ? match[7] : false;
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -2526,8 +2635,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -4965,7 +5072,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.maps__wrapper {\n\twidth: 100%;\n\tdisplay: flex;\n\tpadding: 10px 0 10px 0;\n}\n.maps__map {\n\twidth: 100%;\n\theight: 400px;\n}\n.maps__map1 {\n\tbackground: url('/img/map.jpg');\n\tmargin-right: 5px;\n\tbackground-position: center;\n\tbackground-position-x: center;\n\tbackground-position-y: center;\n}\n@media (max-width: 768px) {\n.maps__wrapper {\n\t\tflex-wrap: wrap;\n}\n.maps__map {\n\t\twidth: 100%;\n\t\tmargin: 5px;\n}\n}\n.footer__langs-container {\n\tdisplay: flex;\n\twidth: 100%;\n\talign-items: center;\n\tjustify-content: center;\n}\n.footer__lang-item {\n\tpadding: 2px;\n\tborder: 1px solid transparent;\n\tborder-radius: 3px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-right: 7px;\n\tmargin-top: 10px;\n\tcursor: pointer;\n}\n.footer__lang-item.active {\n\tborder: 1px solid white;\n}\n.footer__lang-item .flag {\n\twidth: 18px;\n\theight: 15px;\n\tmargin: 2px;\n}\nfooter {\n\tbackground: linear-gradient(0deg, #7a0701 0%, #a40a02 100%);\n\tcolor: white;\n\tpadding: 50px 20px 80px 20px;\n}\n.footer__title {\n\tfont-size: 16px;\n\tfont-weight: bold;\n\tmargin-bottom: 30px;\n}\n.footer__content {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tmargin-bottom: 30px;\n}\n.footer__content-name {\n\twidth: 50%;\n}\n.footer__content-value {\n\twidth: 50%;\n}\n.footer__content-100 {\n\twidth: 100%;\n}\na, a:visited, a:link, a:hover {\n\tcolor: white;\n\ttext-decoration: none;\n\tborder-bottom: 1px dashed white;\n}\na.a-img,\na.a-img:link,\na.a-img:visited,\na.a-img:active {\n\tborder: none;\n\tmargin: 7px 10px 0 0;\n\tdisplay:inline-block;\n}\nfooter .container {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\nfooter .container > div {\n\twidth: 100%;\n\tfloat: left;\n}\n@media (min-width: 1155px) {\nfooter {\n\t\tpadding: 50px 0 80px 0;\n}\n}\n@media (min-width: 768px) {\nfooter .container > div {\n\t\twidth: 33.33%;\n}\n}\n", ""]);
+exports.push([module.i, "\n#footer .maps__wrapper {\n\twidth: 100%;\n\tdisplay: flex;\n\tpadding: 10px 0 10px 0;\n}\n#footer .maps__map {\n\twidth: 100%;\n\theight: 400px;\n}\n#footer .maps__map1 {\n\tbackground: url('/img/map.jpg');\n\tmargin-right: 5px;\n\tbackground-position: center;\n\tbackground-position-x: center;\n\tbackground-position-y: center;\n}\n@media (max-width: 768px) {\n#footer .maps__wrapper {\n\t\tflex-wrap: wrap;\n}\n#footer .maps__map {\n\t\twidth: 100%;\n\t\tmargin: 5px;\n}\n}\n#footer .footer__langs-container {\n\tdisplay: flex;\n\twidth: 100%;\n\talign-items: center;\n\tjustify-content: center;\n}\n#footer .footer__lang-item {\n\tpadding: 2px;\n\tborder: 1px solid transparent;\n\tborder-radius: 3px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-right: 7px;\n\tmargin-top: 10px;\n\tcursor: pointer;\n}\n#footer .footer__lang-item.active {\n\tborder: 1px solid white;\n}\n#footer .footer__lang-item .flag {\n\twidth: 18px;\n\theight: 15px;\n\tmargin: 2px;\n}\n#footer footer {\n\tbackground: linear-gradient(0deg, #7a0701 0%, #a40a02 100%);\n\tcolor: white;\n\tpadding: 50px 20px 80px 20px;\n}\n#footer .footer__title {\n\tfont-size: 16px;\n\tfont-weight: bold;\n\tmargin-bottom: 30px;\n}\n#footer .footer__content {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tmargin-bottom: 30px;\n}\n#footer .footer__content-name {\n\twidth: 50%;\n}\n#footer .footer__content-value {\n\twidth: 50%;\n}\n#footer .footer__content-100 {\n\twidth: 100%;\n}\n#footer a,\n#footer a:visited,\n#footer a:link,\n#footer a:hover {\n\tcolor: white;\n\ttext-decoration: none;\n\tborder-bottom: 1px dashed white;\n}\n#footer a.a-img,\n#footer a.a-img:link,\n#footer a.a-img:visited,\n#footer a.a-img:active {\n\tborder: none;\n\tmargin: 7px 10px 0 0;\n\tdisplay:inline-block;\n}\n#footer footer .container {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\n#footer footer .container > div {\n\twidth: 100%;\n\tfloat: left;\n}\n@media (min-width: 1155px) {\n#footer footer {\n\t\tpadding: 50px 0 80px 0;\n}\n}\n@media (min-width: 768px) {\n#footer footer .container > div {\n\t\twidth: 33.33%;\n}\n}\n", ""]);
 
 // exports
 
@@ -4984,7 +5091,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.site-navigation-mobile {\n\tdisplay: block;\n}\n#menuMobileToggle{\n\tdisplay: block;\n\tposition: absolute;\n\tz-index: 999;\n\ttop: 20px;\n\tright: 40px;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t -ms-user-select: none;\n\t     user-select: none;\n}\n#menuMobileToggle input{\n\tdisplay: block;\n\twidth: 40px;\n\theight: 32px;\n\tposition: absolute;\n\ttop: -7px;\n\tleft: -5px;\n\tcursor: pointer;\n\topacity: 0; /* hide this */\n\tz-index: 2; /* and place it over the hamburger */\n\t-webkit-touch-callout: none;\n}\n#menuMobileToggle > span{\n\tdisplay: block;\n\twidth: 33px;\n\theight: 4px;\n\tmargin-bottom: 5px;\n\tposition: relative;\n\tbackground: #949494;\n\tborder-radius: 3px;\n\tz-index: 1;\n\ttransform-origin: 4px 0px;\n\ttransition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),\n\tbackground 0.5s cubic-bezier(0.77,0.2,0.05,1.0),\n\topacity 0.55s ease;\n}\n#menuMobileToggle > span:first-child {\n\ttransform-origin: 0% 0%;\n}\n#menuMobileToggle > span:nth-last-child(2) {\n\ttransform-origin: 0% 100%;\n}\n#menuMobileToggle input:checked ~ span {\n\topacity: 1;\n\ttransform: rotate(45deg) translate(-2px, -1px);\n\tbackground: #535353;\n}\n#menuMobileToggle input:checked ~ span:nth-last-child(3) {\n\topacity: 0;\n\ttransform: rotate(0deg) scale(0.2, 0.2);\n}\n#menuMobileToggle input:checked ~ span:nth-last-child(2) {\n\topacity: 1;\n\ttransform: rotate(-45deg) translate(0, -1px);\n}\n#menuMobile {\n\tposition: fixed;\n\twidth: 300px;\n\tmargin: -100px 0 0 0;\n\tpadding: 50px;\n\tpadding-top: 125px;\n\tright: -100px;\n\tbackground: #ffffff;\n\tlist-style-type: none;\n\t-webkit-font-smoothing: antialiased;\n\ttransform-origin: 0% 0%;\n\ttransform: translate(100%, 0);\n\ttransition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);\n\tborder-bottom-left-radius: 30px;\n\tbox-shadow: -4px 3px 17px 3px rgba(0, 0, 0, 0.37);\n}\n#menuMobile li{\n\tpadding: 10px 0;\n\tfont-size: 18px;\n}\n#menuMobileToggle input:checked ~ ul{\n\ttransform: scale(1.0, 1.0);\n\topacity: 1;\n}\n#menuMobileToggle li > a {\n\tpadding: 5px 20px;\n\tcolor: #000;\n\tdisplay: inline-block;\n\ttext-decoration: none !important;\n}\n#menuMobileToggle li > a:hover {\n\tcolor: #4cbc09;\n}\n.top-header {\n\tbox-shadow: 0px 10px 16px rgba(84, 83, 83, 0.15);\n\t/*position: absolute;*/\n\twidth: 100%;\n\tz-index: 1;\n\tbackground: white;\n}\n.logo {\n\twidth: 220px;\n\tdisplay: flex;\n\talign-items: center;\n}\n.logo-text {\n\tfont-family: \"Harabara Mais Demo\";\n\tfont-size: 24px;\n\tpadding-top: 10px;\n\tpadding-left: 6px;\n}\n.logo a {\n\tcolor: black;\n\ttext-decoration: none;\n}\n.logo a img {\n\tmargin-top: 10px;\n\theight: 30px;\n}\n.phones {\n\twidth: 200px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tfont-size: 15px;\n\talign-items: center;\n\tpadding-left: 40px;\n\tpadding-top: 10px;\n\tpadding-bottom: 5px;\n}\n.phones a {\n\tcolor: #4cbc09;\n\ttext-decoration: none;\n\tpadding-right: 20px;\n}\n.site-navbar {\n\twidth: calc(100% - 200px);\n\tdisplay: none;\n}\n.site-navbar .site-navigation .site-menu > li {\n\tdisplay: inline-block;\n}\n.site-navbar .site-navigation .site-menu .active {\n\tcolor: #4cbc09;\n\tdisplay: inline-block;\n\tpadding: 5px 20px;\n}\n.site-navbar .site-navigation .site-menu > li > a {\n\tpadding: 5px 20px;\n\tcolor: #000;\n\tdisplay: inline-block;\n\ttext-decoration: none !important;\n}\n.site-navbar .site-navigation .site-menu > li > a:hover {\n\tcolor: #4cbc09;\n}\n.site-navbar .site-navigation .site-menu a {\n\ttext-decoration: none !important;\n\tdisplay: inline-block;\n}\n@media (max-width: 550px) {\n.phones {\n\t\twidth: 180px;\n\t\tfont-size: 14px;\n\t\tpadding-left: 20px;\n}\n#menuMobileToggle {\n\t\tright: 5px;\n}\n}\n@media (min-width: 1000px) {\n.site-navbar {\n\t\tdisplay: block;\n}\n.logo a img {\n\t\t/*margin-top: 10px;*/\n\t\t/*height: 40px;*/\n\t\tposition: absolute;\n\t\ttop: -20px;\n\t\theight: 130px;\n}\n.site-navigation-mobile {\n\t\tdisplay: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n#topHeader {\n\tposition: absolute;\n\tz-index: 2;\n\twidth: 100%;\n}\n.site-navigation-mobile {\n\tdisplay: block;\n}\n#menuMobileToggle{\n\tdisplay: block;\n\tposition: absolute;\n\tz-index: 999;\n\ttop: 11px;\n\tright: 30px;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t -ms-user-select: none;\n\t     user-select: none;\n}\n#menuMobileToggle input{\n\tdisplay: block;\n\twidth: 40px;\n\theight: 32px;\n\tposition: absolute;\n\ttop: -7px;\n\tleft: -5px;\n\tcursor: pointer;\n\topacity: 0; /* hide this */\n\tz-index: 2; /* and place it over the hamburger */\n\t-webkit-touch-callout: none;\n}\n#menuMobileToggle > span{\n\tdisplay: block;\n\twidth: 33px;\n\theight: 4px;\n\tmargin-bottom: 5px;\n\tposition: relative;\n\tbackground: #949494;\n\tborder-radius: 3px;\n\tz-index: 1;\n\ttransform-origin: 4px 0px;\n\ttransition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),\n\tbackground 0.5s cubic-bezier(0.77,0.2,0.05,1.0),\n\topacity 0.55s ease;\n}\n#menuMobileToggle > span:first-child {\n\ttransform-origin: 0% 0%;\n}\n#menuMobileToggle > span:nth-last-child(2) {\n\ttransform-origin: 0% 100%;\n}\n#menuMobileToggle input:checked ~ span {\n\topacity: 1;\n\ttransform: rotate(45deg) translate(-2px, -1px);\n\tbackground: #535353;\n}\n#menuMobileToggle input:checked ~ span:nth-last-child(3) {\n\topacity: 0;\n\ttransform: rotate(0deg) scale(0.2, 0.2);\n}\n#menuMobileToggle input:checked ~ span:nth-last-child(2) {\n\topacity: 1;\n\ttransform: rotate(-45deg) translate(0, -1px);\n}\n#menuMobile {\n\tposition: fixed;\n\twidth: 300px;\n\tmargin: -100px 0 0 0;\n\tpadding: 50px;\n\tpadding-top: 125px;\n\tright: -100px;\n\tbackground: #ffffff;\n\tlist-style-type: none;\n\t-webkit-font-smoothing: antialiased;\n\ttransform-origin: 0% 0%;\n\ttransform: translate(100%, 0);\n\ttransition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);\n\tborder-bottom-left-radius: 30px;\n\tbox-shadow: -4px 3px 17px 3px rgba(0, 0, 0, 0.37);\n}\n#menuMobile li{\n\tpadding: 10px 0;\n\tfont-size: 18px;\n}\n#menuMobileToggle input:checked ~ ul{\n\ttransform: scale(1.0, 1.0);\n\topacity: 1;\n}\n#menuMobileToggle li > a {\n\tpadding: 5px 20px;\n\tcolor: #000;\n\tdisplay: inline-block;\n\ttext-decoration: none !important;\n}\n#menuMobileToggle li > a:hover {\n\tcolor: #003176;\n}\n.top-header {\n\tbox-shadow: 0px 10px 16px rgba(84, 83, 83, 0.15);\n\t/*position: absolute;*/\n\twidth: 100%;\n\tz-index: 1;\n\tbackground: white;\n}\n.logo {\n\twidth: 140px;\n\tdisplay: flex;\n\talign-items: center;\n}\n.logo-text {\n\tfont-size: 24px;\n\tpadding-top: 10px;\n\tpadding-left: 6px;\n}\n.logo a {\n\tcolor: black;\n\ttext-decoration: none;\n}\n.logo a img {\n\theight: 50px;\n\tposition: absolute;\n\ttop: 1px;\n}\n.phones {\n\twidth: 170px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tfont-size: 15px;\n\talign-items: center;\n\tpadding-left: 30px;\n\tpadding-top: 10px;\n\tpadding-bottom: 5px;\n}\n.phones a {\n\tcolor: #003176;\n\ttext-decoration: none;\n\tpadding-right: 10px;\n}\n.site-navbar {\n\twidth: calc(100% - 200px);\n\tdisplay: none;\n}\n.site-navbar .site-navigation .site-menu > li {\n\tdisplay: inline-block;\n}\n.site-navbar .site-navigation .site-menu .active {\n\tcolor: #003176;\n\tdisplay: inline-block;\n\tpadding: 5px 20px;\n}\n.site-navbar .site-navigation .site-menu > li > a {\n\tpadding: 5px 20px;\n\tcolor: #000;\n\tdisplay: inline-block;\n\ttext-decoration: none !important;\n}\n.site-navbar .site-navigation .site-menu > li > a:hover {\n\tcolor: #003176;\n}\n.site-navbar .site-navigation .site-menu a {\n\ttext-decoration: none !important;\n\tdisplay: inline-block;\n}\n@media (max-width: 550px) {\n.phones {\n\t\twidth: 180px;\n\t\tfont-size: 14px;\n\t\tpadding-left: 20px;\n}\n#menuMobileToggle {\n\t\tright: 5px;\n}\n}\n@media (min-width: 1000px) {\n.site-navbar {\n\t\tdisplay: block;\n}\n.logo a img {\n\t\tposition: absolute;\n\t\ttop: -10px;\n\t\theight: 125px;\n}\n.site-navigation-mobile {\n\t\tdisplay: none;\n}\n}\n", ""]);
 
 // exports
 
@@ -5041,7 +5148,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#PhotoGallery {\n\ttext-align: center;\n}\n.glide div[data-glide-el=\"controls\"] {\n\tposition: absolute;\n\ttop: 50%;\n\twidth: 100%;\n}\n.glide div[data-glide-el=\"controls\"] button:active,\n.glide div[data-glide-el=\"controls\"] button:focus {\n\toutline: none;\n}\n.glide div[data-glide-el=\"controls\"] button {\n\tposition: absolute;\n\ttop: 50%;\n\twidth: 40px;\n\theight: 40px;\n\tmargin-top: -23px;\n\tfont-size: 60px;\n\tfont-weight: 100;\n\tline-height: 30px;\n\ttext-decoration: none;\n\ttext-align: center;\n\tbackground: rgba(0, 0, 0, 0.43);\n\tbox-sizing: content-box;\n\tborder: 2px solid #fff;\n\tborder-radius: 33px;\n\topacity: .5;\n\tcursor: pointer;\n\tpadding: 10px;\n}\n.glide div[data-glide-el=\"controls\"] button:hover {\n\topacity: .8;\n}\n.glide div[data-glide-el=\"controls\"] button[data-glide-dir=\">\"] {\n\tright: 10px;\n}\n.glide div[data-glide-el=\"controls\"] button[data-glide-dir=\"<\"] {\n\tleft: 10px;\n}\n.image {\n\tbackground-size: cover;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center center;\n\tborder: 1px solid rgba(226, 225, 225, 0.63);\n\tmargin: 10px auto;\n\tborder-radius: 4px;\n\tcursor: pointer;\n\ttransition: transform 0.2s;\n\t-webkit-transition: -webkit-transform 0.2s;\n}\n.image:hover {\n\ttransform: scale(1.1);\n\t-webkit-transform: scale(1.1);\n}\nh1 {\n\tpadding: 40px 0 25px 0;\n}\n.thumbs {\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tflex-wrap: nowrap;\n}\n", ""]);
+exports.push([module.i, "\n.slide-image {\n\tbox-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.31);\n}\n", ""]);
 
 // exports
 
@@ -5079,7 +5186,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.site-navigation-mobile {\n\tdisplay: block;\n}\n.flag {\n\theight: 14px;\n\tmargin-right: 5px;\n\tborder-radius: 3px;\n}\n.langs-container {\n\tposition: absolute;\n\tz-index: 3;\n\tbackground: white;\n\tpadding: 0 20px 10px;\n\tborder-radius: 10px;\n}\n.lang-item {\n\tdisplay: flex;\n\talign-items: center;\n\tcursor: pointer;\n}\n.lang-item:hover {\n\tcolor: #4cbc09;\n}\n", ""]);
+exports.push([module.i, "\n.site-navigation-mobile {\n\tdisplay: block;\n}\n.flag {\n\theight: 14px;\n\tmargin-right: 5px;\n\tborder-radius: 3px;\n}\n.langs-container {\n\tposition: absolute;\n\tz-index: 3;\n\tbackground: white;\n\tpadding: 0 20px 10px;\n\tborder-radius: 10px;\n}\n.lang-item {\n\tdisplay: flex;\n\talign-items: center;\n\tcursor: pointer;\n}\n.lang-item:hover {\n\tcolor: #003176;\n}\n", ""]);
 
 // exports
 
@@ -11381,96 +11488,90 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { position: "absolute", "z-index": "2", width: "100%" } },
-    [
-      _c("div", { staticClass: "top-header" }, [
-        _c("div", { staticClass: "container" }, [
-          _c(
-            "div",
-            {
-              staticClass: "flex",
-              staticStyle: { "justify-content": "space-between" }
-            },
-            [
-              _c("div", { staticClass: "logo" }, [
-                _vm.logoSrc
-                  ? _c("a", { attrs: { href: "/" } }, [
-                      _c("img", { attrs: { src: _vm.logoSrc, alt: "" } })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.logoText
-                  ? _c(
-                      "a",
-                      { staticClass: "logo-text", attrs: { href: "/" } },
-                      [_vm._v(_vm._s(_vm.logoText))]
+  return _c("div", { attrs: { id: "topHeader" } }, [
+    _c("div", { staticClass: "top-header" }, [
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            staticClass: "flex",
+            staticStyle: { "justify-content": "space-between" }
+          },
+          [
+            _c("div", { staticClass: "logo" }, [
+              _vm.logoSrc
+                ? _c("a", { attrs: { href: "/" } }, [
+                    _c("img", { attrs: { src: _vm.logoSrc, alt: "" } })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.logoText
+                ? _c("a", { staticClass: "logo-text", attrs: { href: "/" } }, [
+                    _vm._v(_vm._s(_vm.logoText))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "phones" }, [
+              _vm.phone1
+                ? _c("a", { attrs: { href: "tel:" + _vm.phone1 } }, [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t" + _vm._s(_vm.phone1) + "\n\t\t\t\t\t"
                     )
-                  : _vm._e()
-              ]),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "phones" }, [
-                _vm.phone1
-                  ? _c("a", { attrs: { href: "tel:" + _vm.phone1 } }, [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t" + _vm._s(_vm.phone1) + "\n\t\t\t\t\t"
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.phone2
-                  ? _c("a", { attrs: { href: "tel:" + _vm.phone2 } }, [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t" + _vm._s(_vm.phone2) + "\n\t\t\t\t\t"
-                      )
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "site-navbar" }, [
-                _c(
-                  "nav",
-                  {
-                    staticClass: "site-navigation position-relative text-right",
-                    attrs: { role: "navigation" }
-                  },
-                  [_c("menuComponent", { attrs: { id: "menuDesktop" } })],
-                  1
-                )
-              ]),
-              _vm._v(" "),
+              _vm.phone2
+                ? _c("a", { attrs: { href: "tel:" + _vm.phone2 } }, [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t" + _vm._s(_vm.phone2) + "\n\t\t\t\t\t"
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "site-navbar" }, [
               _c(
                 "nav",
                 {
-                  staticClass: "site-navigation-mobile",
+                  staticClass: "site-navigation position-relative text-right",
                   attrs: { role: "navigation" }
                 },
-                [
-                  _c(
-                    "div",
-                    { attrs: { id: "menuMobileToggle" } },
-                    [
-                      _c("input", { attrs: { type: "checkbox" } }),
-                      _vm._v(" "),
-                      _c("span"),
-                      _vm._v(" "),
-                      _c("span"),
-                      _vm._v(" "),
-                      _c("span"),
-                      _vm._v(" "),
-                      _c("menuComponent", { attrs: { id: "menuMobile" } })
-                    ],
-                    1
-                  )
-                ]
+                [_c("menuComponent", { attrs: { id: "menuDesktop" } })],
+                1
               )
-            ]
-          )
-        ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "nav",
+              {
+                staticClass: "site-navigation-mobile",
+                attrs: { role: "navigation" }
+              },
+              [
+                _c(
+                  "div",
+                  { attrs: { id: "menuMobileToggle" } },
+                  [
+                    _c("input", { attrs: { type: "checkbox" } }),
+                    _vm._v(" "),
+                    _c("span"),
+                    _vm._v(" "),
+                    _c("span"),
+                    _vm._v(" "),
+                    _c("span"),
+                    _vm._v(" "),
+                    _c("menuComponent", { attrs: { id: "menuMobile" } })
+                  ],
+                  1
+                )
+              ]
+            )
+          ]
+        )
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -11523,7 +11624,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "faq__wrapper", attrs: { id: "faq-section" } },
+    {
+      staticClass: "faq__wrapper home-section__wrapper",
+      attrs: { id: "faq-section" }
+    },
     [
       _c("div", { staticClass: "container" }, [
         _vm.lang === "ru" ? _c("h1", [_vm._v("Вопросы и ответы")]) : _vm._e(),
@@ -11531,6 +11635,8 @@ var render = function() {
         _vm.lang === "ro"
           ? _c("h1", [_vm._v("Întrebări și răspunsuri")])
           : _vm._e(),
+        _vm._v(" "),
+        _vm.lang === "en" ? _c("h1", [_vm._v("FAQ")]) : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
@@ -11695,50 +11801,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.images.length
-      ? _c(
-          "div",
-          { attrs: { id: "PhotoGallery" } },
-          [
-            _c("h1", [
-              _vm.lang === "ru"
-                ? _c("span", [_vm._v("Фото галерея")])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.lang === "ro"
-                ? _c("span", [_vm._v("Galerie Foto")])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.lang === "en"
-                ? _c("span", [_vm._v("Photo Gallery")])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("Gallery", {
-              attrs: { images: _vm.images, index: _vm.index },
-              on: {
-                close: function($event) {
-                  _vm.index = null
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.images.length > 0 || _vm.videos.length > 0,
+            expression: "images.length > 0 || videos.length > 0"
+          }
+        ],
+        attrs: { id: "PhotoGallery" }
+      },
+      [
+        _c("h1", [
+          _vm.lang === "ru"
+            ? _c("span", [_vm._v("Фото/Видео галерея")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.lang === "ro"
+            ? _c("span", [_vm._v("Galerie Foto/Video")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.lang === "en"
+            ? _c("span", [_vm._v("Photo/Video Gallery")])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("Gallery", {
+          attrs: {
+            images: _vm.galleryItems,
+            index: _vm.index,
+            options: _vm.galleryOptions
+          },
+          on: {
+            close: function($event) {
+              _vm.index = null
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.images.length > 0
+          ? _c(
               "vue-glide",
-              { attrs: { "focus-at": 0, rewind: false, perView: _vm.perView } },
+              {
+                attrs: {
+                  type: "slider",
+                  "start-at": 0,
+                  bound: true,
+                  "focus-at": 0,
+                  rewind: false,
+                  perView: _vm.perView,
+                  bullet: true
+                }
+              },
               [
                 _vm._l(_vm.images, function(image, i) {
                   return _c("vue-glide-slide", { key: i }, [
                     _c("div", {
-                      staticClass: "image",
+                      staticClass: "slide-image",
                       style: {
-                        backgroundImage: "url(" + image + ")",
-                        width: "300px",
-                        height: "200px"
+                        backgroundImage: "url(/uploads/" + image.path + ")",
+                        width: _vm.imageWidth + "px",
+                        height: (_vm.imageWidth * 6) / 9 + "px"
                       },
                       on: {
                         click: function($event) {
-                          _vm.index = i
+                          return _vm.gallery(_vm.imagesArray, i, "images")
                         }
                       }
                     })
@@ -11760,13 +11890,62 @@ var render = function() {
                 ])
               ],
               2
-            ),
-            _vm._v(" "),
-            _c("div", { staticStyle: { clear: "both", height: "70px" } })
-          ],
-          1
-        )
-      : _vm._e()
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.videos.length > 0
+          ? _c(
+              "vue-glide",
+              {
+                attrs: {
+                  "start-at": 0,
+                  bound: true,
+                  type: "slider",
+                  "focus-at": 0,
+                  rewind: false,
+                  perView: _vm.perViewVideo,
+                  bullet: true
+                }
+              },
+              [
+                _vm._l(_vm.videos, function(video, i) {
+                  return _c("vue-glide-slide", { key: i }, [
+                    _c("div", {
+                      staticClass: "slide-image",
+                      style: {
+                        backgroundImage: "url(" + video.poster + ")",
+                        width: _vm.videoWidth + "px",
+                        height: (_vm.videoWidth * 6) / 9 + "px"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.gallery(_vm.videos, i, "video")
+                        }
+                      }
+                    })
+                  ])
+                }),
+                _vm._v(" "),
+                _c("template", { slot: "control" }, [
+                  _c("button", { attrs: { "data-glide-dir": "<" } }, [
+                    _c("img", {
+                      attrs: { src: "/img/arrow-left.svg", height: "34px" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("button", { attrs: { "data-glide-dir": ">" } }, [
+                    _c("img", {
+                      attrs: { src: "/img/arrow-right.svg", height: "34px" }
+                    })
+                  ])
+                ])
+              ],
+              2
+            )
+          : _vm._e()
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -11883,7 +12062,31 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("li", [
-      _c("a", { attrs: { href: "/catalog" } }, [
+      _c(
+        "a",
+        {
+          directives: [
+            {
+              name: "scroll-to",
+              rawName: "v-scroll-to",
+              value: { el: "#PhotoGallery" },
+              expression: "{el: '#PhotoGallery'}"
+            }
+          ],
+          attrs: { href: "/#PhotoGallery" }
+        },
+        [
+          _vm.lang === "ru" ? _c("span", [_vm._v("Наша галерея")]) : _vm._e(),
+          _vm._v(" "),
+          _vm.lang === "ro" ? _c("span", [_vm._v("Galeria Nostră")]) : _vm._e(),
+          _vm._v(" "),
+          _vm.lang === "en" ? _c("span", [_vm._v("Our Gallery")]) : _vm._e()
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("li", [
+      _c("a", { attrs: { href: "/#products" } }, [
         _vm.lang === "ru" ? _c("span", [_vm._v("Каталог")]) : _vm._e(),
         _vm._v(" "),
         _vm.lang === "ro" ? _c("span", [_vm._v("Catalog")]) : _vm._e(),
@@ -29623,8 +29826,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\WEB\OpenServer_5.2.9_min\OSPanel\domains\cpb.md.local\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! c:\WEB\OpenServer_5.2.9_min\OSPanel\domains\cpb.md.local\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\WEB\OpenServer_5.2.9_min\OSPanel\domains\cpb.md.local\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\WEB\OpenServer_5.2.9_min\OSPanel\domains\cpb.md.local\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

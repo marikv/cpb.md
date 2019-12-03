@@ -21,7 +21,7 @@
                         <a href="/uploads/{{ $photo->path }}" target="_blank">
                             <img src="/uploads/{{ $photo->path }}" height="150px" style="border-radius: 4px;"/>
                         </a>
-                        <div onclick="deletePhotoFromGallery({{ $photo->id }})" class="deleteIcon">X</div>
+                        <div onclick="deletePhotoOrVideoFromGallery({{ $photo->id }})" class="deleteIcon">X</div>
                     </div>
                 @endforeach
 
@@ -29,20 +29,5 @@
         </div>
 
     </div>
-
-    <script>
-        var deletePhotoFromGallery = function (id) {
-            if (confirm("Sunteti sigur ca doriti sa stergeti?")) {
-	            $('#spinner').show();
-	            $.post('/photo-gallery/delete', { id: id }, function (response) {
-		            $('#spinner').hide();
-		            $('#imgGallery' + id).hide();
-	            }).fail(function() {
-		            alert( "error" );
-		            $('#spinner').hide();
-	            })
-            }
-        }
-    </script>
 
 @endsection

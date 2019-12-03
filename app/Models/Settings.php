@@ -44,6 +44,7 @@ class Settings extends Model
             'langing_bg_1' => '',
             'langing_bg_2' => '',
             'photoForPhotoGallery' => '',
+            'videoForVideoGallery' => '',
         ];
 
         $defaultWithLangs = ['title', 'keywords', 'description', 'logotext', 'home_section_title', 'home_section_text'];

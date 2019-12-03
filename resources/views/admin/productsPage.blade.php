@@ -18,7 +18,7 @@
                     <form action="/admin/category/add" method="post">
                         {{csrf_field()}}
 
-                        <input type="hidden" name="cat_id" value="{{$edit && $categoryEdit->id ? $categoryEdit->id : ''}}" id="cat_id" />
+                        <input type="hidden" name="cat_id" value="{{$edit && !empty($categoryEdit->id) ? $categoryEdit->id : ''}}" id="cat_id" />
 
                         <div class="form-group row">
                             <label for="cat_nume_ro" class="col-sm-2 col-form-label">Nume RO</label>
@@ -26,7 +26,7 @@
                                 <input type="text"
                                        class="form-control"
                                        name="cat_nume_ro"
-                                       value="{{$edit && $categoryEdit->name_ro ? $categoryEdit->name_ro : ''}}"
+                                       value="{{$edit && !empty($categoryEdit->name_ro) ? $categoryEdit->name_ro : ''}}"
                                        id="cat_nume_ro" placeholder=""/>
                             </div>
                         </div>
@@ -34,14 +34,14 @@
                             <label for="cat_nume_ru" class="col-sm-2 col-form-label">Nume RU</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="cat_nume_ru"
-                                       value="{{$edit && $categoryEdit->name_ru ? $categoryEdit->name_ru : ''}}" id="cat_nume_ru" placeholder=""/>
+                                       value="{{$edit && !empty($categoryEdit->name_ru) ? $categoryEdit->name_ru : ''}}" id="cat_nume_ru" placeholder=""/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="cat_nume_en" class="col-sm-2 col-form-label">Nume EN</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="cat_nume_en"
-                                       value="{{$edit && $categoryEdit->name_en ? $categoryEdit->name_en : ''}}" id="cat_nume_en" placeholder=""/>
+                                       value="{{$edit && !empty($categoryEdit->name_en) ? $categoryEdit->name_en : ''}}" id="cat_nume_en" placeholder=""/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -68,7 +68,7 @@
                         <div class="form-group row">
                             <label for="name_ro" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
-                                <img src="/uploads/{{$productEdit->photo ?? 'no-image.png'}}" style="height: 100px;"/>
+                                <img id="photo_img" src="/uploads/{{$productEdit->photo ?? 'no-image.png'}}" style="height: 100px;"/>
                                 <input type="file" name="photo" id="photo" placeholder=""/>
                             </div>
                         </div>
@@ -229,6 +229,19 @@
     </div>
 
     <script>
+	    function readURL(input) {
+		    if (input.files && input.files[0]) {
+			    var reader = new FileReader();
+			    reader.onload = function(e) {
+				    $('#photo_img').attr('src', e.target.result);
+			    };
+			    reader.readAsDataURL(input.files[0]);
+		    }
+	    }
+	    $("#photo").change(function() {
+		    readURL(this);
+	    });
+
 
         var deleteCategory = function (id) {
             if (confirm("Sunteti sigur ca doriti sa stergeti?")) {

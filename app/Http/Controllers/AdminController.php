@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Image;
 
 class AdminController extends Controller
 {
@@ -58,12 +59,27 @@ class AdminController extends Controller
     public function photoGallery()
     {
         $settingsData = Settings::getAll();
-        $photos = Photo::all();
+        $photos = Photo::where('type', 0)->get();
 
         return view('admin.photoGallery')
             ->with('photos', $photos)
             ->with('settingsData', $settingsData);
     }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function videoGallery()
+    {
+        $settingsData = Settings::getAll();
+        $videos = Photo::where('type', 1)->get();
+
+        return view('admin.videoGallery')
+            ->with('videos', $videos)
+            ->with('settingsData', $settingsData);
+    }
+
 
     /**
      * @param Request $request
@@ -180,6 +196,14 @@ class AdminController extends Controller
                 $model = new Photo();
                 $model->path =  $request->value;
                 $model->type = 0;
+                $model ->save();
+
+                return 0;
+            }
+            if ($request->name == 'videoForVideoGallery') {
+                $model = new Photo();
+                $model->path =  $request->value;
+                $model->type = 1;
                 $model ->save();
 
                 return 0;

@@ -64,7 +64,13 @@
 		methods: {
 			updateScroll() {
 				this.scrollPosition = window.scrollY;
-				console.log(this.scrollPosition);
+				const topHeader = document.getElementById('topHeader');
+				const h = topHeader.offsetHeight;
+				if (this.scrollPosition > 330) {
+					topHeader.style.position = 'fixed';
+				} else {
+					topHeader.style.position = 'absolute';
+				}
 			}
 		},
 		mounted() {

@@ -17,7 +17,11 @@ var saveImage = function(name) {
 };
 
 var saveText = function (name) {
-	saveSettings(name, $('#' + name).val());
+	saveSettings(name, $('#' + name).val(), function () {
+		if (name === 'videoForVideoGallery') {
+			document.location.reload();
+		}
+	});
 };
 
 var saveTextTinyMce = function (name) {
@@ -40,6 +44,19 @@ var saveSettings = function (name, value, callbackSuccess, callbackError) {
 	})
 };
 
+
+var deletePhotoOrVideoFromGallery = function (id) {
+	if (confirm("Sunteti sigur ca doriti sa stergeti?")) {
+		$('#spinner').show();
+		$.post('/photo-gallery/delete', { id: id }, function (response) {
+			$('#spinner').hide();
+			$('#imgGallery' + id).hide();
+		}).fail(function() {
+			alert( "error" );
+			$('#spinner').hide();
+		})
+	}
+};
 
 var iter = 0;
 var interv = setInterval(() => {

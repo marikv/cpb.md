@@ -1,5 +1,5 @@
 <template>
-	<div style="position: absolute; z-index: 2;width: 100%;">
+	<div id="topHeader">
 		
 		<div class="top-header">
 			<div class="container">
@@ -62,6 +62,7 @@
 				return window.settingsData[`logotext_${this.lang}`];
 			},
 			phone1() {
+				console.log(window.settingsData['phone1']);
 				return window.settingsData['phone1'];
 			},
 			phone2() {
@@ -74,7 +75,11 @@
 </script>
 
 <style>
-	
+	#topHeader {
+		position: absolute;
+		z-index: 2;
+		width: 100%;
+	}
 	.site-navigation-mobile {
 		display: block;
 	}
@@ -82,8 +87,8 @@
 		display: block;
 		position: absolute;
 		z-index: 999;
-		top: 20px;
-		right: 40px;
+		top: 11px;
+		right: 30px;
 		-webkit-user-select: none;
 		user-select: none;
 	}
@@ -163,7 +168,7 @@
 		text-decoration: none !important;
 	}
 	#menuMobileToggle li > a:hover {
-		color: #4cbc09;
+		color: #003176;
 	}
 	.top-header {
 		box-shadow: 0px 10px 16px rgba(84, 83, 83, 0.15);
@@ -173,12 +178,11 @@
 		background: white;
 	}
 	.logo {
-		width: 220px;
+		width: 140px;
 		display: flex;
 		align-items: center;
 	}
 	.logo-text {
-		font-family: "Harabara Mais Demo";
 		font-size: 24px;
 		padding-top: 10px;
 		padding-left: 6px;
@@ -188,23 +192,24 @@
 		text-decoration: none;
 	}
 	.logo a img {
-		margin-top: 10px;
-		height: 30px;
+		height: 50px;
+		position: absolute;
+		top: 1px;
 	}
 	.phones {
-		width: 200px;
+		width: 170px;
 		display: flex;
 		flex-wrap: wrap;
 		font-size: 15px;
 		align-items: center;
-		padding-left: 40px;
+		padding-left: 30px;
 		padding-top: 10px;
 		padding-bottom: 5px;
 	}
 	.phones a {
-		color: #4cbc09;
+		color: #003176;
 		text-decoration: none;
-		padding-right: 20px;
+		padding-right: 10px;
 	}
 	.site-navbar {
 		width: calc(100% - 200px);
@@ -216,7 +221,7 @@
 	}
 	
 	.site-navbar .site-navigation .site-menu .active {
-		color: #4cbc09;
+		color: #003176;
 		display: inline-block;
 		padding: 5px 20px;
 	}
@@ -229,7 +234,7 @@
 	}
 	
 	.site-navbar .site-navigation .site-menu > li > a:hover {
-		color: #4cbc09;
+		color: #003176;
 	}
 	
 	.site-navbar .site-navigation .site-menu a {
@@ -253,11 +258,9 @@
 		}
 		
 		.logo a img {
-			/*margin-top: 10px;*/
-			/*height: 40px;*/
 			position: absolute;
-			top: -20px;
-			height: 130px;
+			top: -10px;
+			height: 125px;
 		}
 		
 		.site-navigation-mobile {

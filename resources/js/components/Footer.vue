@@ -1,5 +1,5 @@
 <template>
-	<div  id="footer">
+	<div id="footer">
 		
 		<div  class="maps__wrapper">
 			<div class="maps__map maps__map1"></div>
@@ -122,16 +122,16 @@
 </script>
 
 <style>
-	.maps__wrapper {
+	#footer .maps__wrapper {
 		width: 100%;
 		display: flex;
 		padding: 10px 0 10px 0;
 	}
-	.maps__map {
+	#footer .maps__map {
 		width: 100%;
 		height: 400px;
 	}
-	.maps__map1 {
+	#footer .maps__map1 {
 		background: url('/img/map.jpg');
 		margin-right: 5px;
 		background-position: center;
@@ -139,21 +139,21 @@
 		background-position-y: center;
 	}
 	@media (max-width: 768px) {
-		.maps__wrapper {
+		#footer .maps__wrapper {
 			flex-wrap: wrap;
 		}
-		.maps__map {
+		#footer .maps__map {
 			width: 100%;
 			margin: 5px;
 		}
 	}
-	.footer__langs-container {
+	#footer .footer__langs-container {
 		display: flex;
 		width: 100%;
 		align-items: center;
 		justify-content: center;
 	}
-	.footer__lang-item {
+	#footer .footer__lang-item {
 		padding: 2px;
 		border: 1px solid transparent;
 		border-radius: 3px;
@@ -164,69 +164,72 @@
 		margin-top: 10px;
 		cursor: pointer;
 	}
-	.footer__lang-item.active {
+	#footer .footer__lang-item.active {
 		border: 1px solid white;
 	}
-	.footer__lang-item .flag {
+	#footer .footer__lang-item .flag {
 		width: 18px;
 		height: 15px;
 		margin: 2px;
 	}
-	footer {
+	#footer footer {
 		background: linear-gradient(0deg, #7a0701 0%, #a40a02 100%);
 		color: white;
 		padding: 50px 20px 80px 20px;
 	}
-	.footer__title {
+	#footer .footer__title {
 		font-size: 16px;
 		font-weight: bold;
 		margin-bottom: 30px;
 	}
-	.footer__content {
+	#footer .footer__content {
 		display: flex;
 		flex-wrap: wrap;
 		margin-bottom: 30px;
 	}
-	.footer__content-name {
+	#footer .footer__content-name {
 		width: 50%;
 	}
-	.footer__content-value {
+	#footer .footer__content-value {
 		width: 50%;
 	}
-	.footer__content-100 {
+	#footer .footer__content-100 {
 		width: 100%;
 	}
-	a, a:visited, a:link, a:hover {
+	#footer a,
+	#footer a:visited,
+	#footer a:link,
+	#footer a:hover {
 		color: white;
 		text-decoration: none;
 		border-bottom: 1px dashed white;
 	}
-	a.a-img,
-	a.a-img:link,
-	a.a-img:visited,
-	a.a-img:active {
+	#footer a.a-img,
+	#footer a.a-img:link,
+	#footer a.a-img:visited,
+	#footer a.a-img:active {
 		border: none;
 		margin: 7px 10px 0 0;
 		display:inline-block;
 	}
 	
-	footer .container {
+	#footer footer .container {
 		display: flex;
 		flex-wrap: wrap;
 	}
 	
-	footer .container > div {
+	#footer footer .container > div {
 		width: 100%;
 		float: left;
 	}
 	
 	@media (min-width: 1155px) {
-		footer {
+		#footer footer {
 			padding: 50px 0 80px 0;
 		}
 	}
 	@media (min-width: 768px) {
-		footer .container > div {
+		#footer footer .container > div {
 			width: 33.33%;
 		}
 	}
