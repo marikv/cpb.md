@@ -7,6 +7,7 @@
     <script>
 		window.settingsData = [].concat(@json($settingsData))[0];
 		window.photos = [].concat(@json($photos));
+		window.faqs = [].concat(@json($faqs));
     </script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

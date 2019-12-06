@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Faq;
 use App\Models\Photo;
+use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -37,10 +40,12 @@ class HomeController extends Controller
     public function landingPage()
     {
         $settingsData = Settings::getAll();
-        $photos = Photo::all();
+        $photos = Photo::orderBy('id', 'DESC')->get();
+        $faqs = Faq::orderBy('id', 'DESC')->get();
 
         return view('layouts.landing')
             ->with('photos', $photos)
+            ->with('faqs', $faqs)
             ->with('settingsData', $settingsData);
     }
 
@@ -83,6 +88,35 @@ class HomeController extends Controller
     public static function setLang($lang)
     {
         Session::put('lang', $lang);
+    }
+
+
+    public function getCategories()
+    {
+        $list = Category::orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $list
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCategory(Request $request)
+    {
+        $categoryData = Category::find($request->id);
+        $productsData = Product::where('category_id', $request->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'categoryData' => $categoryData,
+                'productsData' => $productsData
+            ]
+        ]);
     }
 
 

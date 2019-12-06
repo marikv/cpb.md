@@ -1,19 +1,26 @@
 <template>
 	<div>
-		<div id="PhotoGallery" v-show="images.length > 0 || videos.length > 0">
+		<div id="PhotoGallery" v-show="images.length > 0">
 			
 			<h1>
-				<span v-if="lang === 'ru'">Фото/Видео галерея</span>
-				<span v-if="lang === 'ro'">Galerie Foto/Video</span>
-				<span v-if="lang === 'en'">Photo/Video Gallery</span>
+				<span v-if="lang === 'ru'">Фото галерея</span>
+				<span v-if="lang === 'ro'">Galerie Foto</span>
+				<span v-if="lang === 'en'">Photo Gallery</span>
 			</h1>
+			
+			
 			
 			<Gallery :images="galleryItems"
 			         :index="index"
 			         :options="galleryOptions"
 			         @close="index = null"></Gallery>
 			
+			
+			
+			
+			
 			<vue-glide
+					:key="'vue-glide-key-photo'"
 					v-if="images.length > 0"
 					:type="'slider'"
 					:start-at="0"
@@ -42,27 +49,41 @@
 					</button>
 				</template>
 			</vue-glide>
+		</div>
+			
+			
+		
+		<div id="VideoGallery" v-show="videos.length > 0">
+			
+			<h1>
+				<span v-if="lang === 'ru'">Видео галерея</span>
+				<span v-if="lang === 'ro'">Galerie Video</span>
+				<span v-if="lang === 'en'">Video Gallery</span>
+			</h1>
+			
+			
 			
 			
 			
 			<vue-glide
-					v-if="videos.length > 0"
-					:start-at="0"
-					:bound="true"
-					:type="'slider'"
-					:focus-at="0"
-					:rewind="false"
-					:perView="perViewVideo"
-					:bullet="true"
+				:key="'vue-glide-key-video'"
+				v-if="videos.length > 0"
+				:start-at="0"
+				:bound="true"
+				:type="'slider'"
+				:focus-at="0"
+				:rewind="false"
+				:perView="perViewVideo"
+				:bullet="true"
 			>
 				<vue-glide-slide
 						v-for="(video, i) in videos"
-						:key="i"
-				>
+						:key="i" >
 					<div	class="slide-image"
 					        @click="gallery(videos, i, 'video')"
-					        :style="{ backgroundImage: 'url(' + video.poster + ')', width: `${videoWidth}px`, height: `${(videoWidth * 6 / 9)}px`  }"
-					></div>
+					        :style="{ backgroundImage: 'url(' + video.poster + ')', width: `${videoWidth}px`, height: `${(videoWidth * 6 / 9)}px`  }" >
+						<img src="/img/play-button.svg" :style="{height: '60px', marginTop: `${(videoWidth * 6 / 9) / 2 - 30}px`}">
+					</div>
 				</vue-glide-slide>
 				
 				<template slot="control">
@@ -74,8 +95,9 @@
 					</button>
 				</template>
 			</vue-glide>
-		
+			
 		</div>
+		
 	</div>
 </template>
 
@@ -107,7 +129,7 @@
 						controls: 1,
 					},
 					// Require a click on the native YouTube player for the initial playback:
-					youTubeClickToPlay: false,
+					youTubeClickToPlay: true,
 				},
 				imageOptions: {},
 				galleryOptions: {},
@@ -128,7 +150,7 @@
 				return this.images.map(item => `/uploads/${item.path}`);
 			},
 			videos() {
-				return window.photos.length ? window.photos.filter(item => item.type === 1).map(item => {
+				return window.photos.length ? window.photos.filter(item => item.type !== 0).map(item => {
 					item.youtube = this.getYoutubeIdFromLink(item.path);
 					item.type = 'text/html';
 					item.href = item.path;
@@ -172,8 +194,3 @@
 	}
 </script>
 
-<style>
-	.slide-image {
-		box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.31);
-	}
-</style>

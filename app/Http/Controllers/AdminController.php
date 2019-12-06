@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Models\Faq;
+use App\Models\Article;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -53,13 +55,38 @@ class AdminController extends Controller
         return view('admin.landingPage')->with('settingsData', $settingsData);
     }
 
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function faqPage(Request $request)
+    {
+        $settingsData = Settings::getAll();
+        $faqData = Faq::orderBy('id', 'DESC')->get();
+
+        $faqEdit = new \stdClass();
+
+        $faq = $request->get('faq');
+        if (!empty($faq)) {
+            $faqEdit = Faq::find($faq);
+        }
+
+
+        return view('admin.faq')
+            ->with('settingsData', $settingsData)
+            ->with('faqEdit', $faqEdit)
+            ->with('faqData', $faqData);
+    }
+
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function photoGallery()
     {
         $settingsData = Settings::getAll();
-        $photos = Photo::where('type', 0)->get();
+        $photos = Photo::where('type', 0)->orderBy('id', 'DESC')->get();
 
         return view('admin.photoGallery')
             ->with('photos', $photos)
@@ -87,14 +114,14 @@ class AdminController extends Controller
      */
     public function productsPage(Request $request)
     {
-        $categoriesData = Category::all();
-        $productsData = Product::all();
+        $categoriesData = Category::orderBy('id', 'DESC')->get();
+        $productsData = Product::orderBy('id', 'DESC')->get();
         $categoryEdit = new \stdClass();
         $productEdit = new \stdClass();
 
         $cat = $request->get('category');
         if (!empty($cat)) {
-            $productsData = Product::where('category_id', $cat)->get();
+            $productsData = Product::where('category_id', $cat)->orderBy('id', 'DESC')->get();
             $categoryEdit = Category::find($cat);
         }
 
@@ -111,6 +138,50 @@ class AdminController extends Controller
             ->with('categoriesData', $categoriesData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function newsPage(Request $request)
+    {
+        $articlesData = Article::orderBy('id', 'DESC')->get();
+        $articleEdit = new \stdClass();
+
+        $cat = $request->get('article');
+        if (!empty($cat)) {
+            $articleEdit = Article::find($cat);
+        }
+
+        return view('admin.newsPage')
+            ->with('edit', !empty($request->get('edit')))
+            ->with('articleEdit', $articleEdit)
+            ->with('articlesData', $articlesData);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addFaq(Request $request)
+    {
+        if (!empty($request->id)) {
+            $model = Faq::find($request->id);
+        } else {
+            $model = new Faq();
+        }
+
+        $model->query_ro = $request->query_ro;
+        $model->query_ru = $request->query_ru;
+        $model->query_en = $request->query_en;
+        $model->answer_ro = $request->answer_ro;
+        $model->answer_ru = $request->answer_ru;
+        $model->answer_en = $request->answer_en;
+
+        $model->save();
+
+        return redirect('/admin/page/faq');
+    }
 
     /**
      * @param Request $request
@@ -124,6 +195,15 @@ class AdminController extends Controller
             $model = new Category();
         }
 
+        if($request->file('cat_photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'.'.$request->file('cat_photo')->extension();
+            $request->file('cat_photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+
         $model->name_ro = $request->cat_nume_ro;
         $model->name_ru = $request->cat_nume_ru;
         $model->name_en = $request->cat_nume_en;
@@ -132,6 +212,9 @@ class AdminController extends Controller
         return redirect('/admin/page/products?category=' . $model->id);
     }
 
+    /**
+     * @param Request $request
+     */
     public function deleteProductCategory(Request $request)
     {
         if ($request->id) {
@@ -140,6 +223,9 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
     public function deleteProduct(Request $request)
     {
         if ($request->id) {
@@ -147,6 +233,30 @@ class AdminController extends Controller
             $delete = $model->delete();
         }
     }
+
+
+    /**
+     * @param Request $request
+     */
+    public function deleteArticle(Request $request)
+    {
+        if ($request->id) {
+            $model = \App\Models\Article::find($request->id);
+            $delete = $model->delete();
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function deleteFaq(Request $request)
+    {
+        if ($request->id) {
+            $model = \App\Models\Faq::find($request->id);
+            $delete = $model->delete();
+        }
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -181,6 +291,41 @@ class AdminController extends Controller
         $model->save();
 
         return redirect('/admin/page/products?product=' . $model->id .'&edit=1');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addArticle(Request $request)
+    {
+        if ($request->id) {
+            $model = Article::find($request->id);
+        } else {
+            $model = new Article();
+        }
+
+        if($request->file('photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'.'.$request->file('photo')->extension();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+
+        $model->name_ro = $request->name_ro;
+        $model->name_ru = $request->name_ru;
+        $model->name_en = $request->name_en;
+
+        $model->text_ro = $request->text_ro;
+        $model->text_ru = $request->text_ru;
+        $model->text_en = $request->text_en;
+
+        $model->save();
+
+        return redirect('/admin/page/news?article=' . $model->id .'&edit=1');
     }
 
 

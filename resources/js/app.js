@@ -25,8 +25,11 @@ Vue.use(VueScrollTo, {
 	y: true
 });
 
-import News from './components/News';
 import LandingPage from './components/LandingPage';
+import News from './components/News';
+import Categories from './components/Products';
+import Category from './components/Products/ProductsList';
+import Product from './components/Products/Product';
 
 
 Vue.use(VueRouter);
@@ -35,16 +38,47 @@ const router = new VueRouter({
 		{
 			path: '/',
 			component: LandingPage,
+			name: 'LandingPage',
 		},
 		{
 			path: '/news',
 			component: News,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/categories',
+			component: Categories,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/category/:id',
+			component: Category,
+			props: true,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/products/:id',
+			component: Product,
+			props: true,
+			meta: { scrollToTop: true },
 		},
 		{
 			path: '*',
 			redirect: '/404',
+			meta: { scrollToTop: true },
 		}
-	]
+	],
+	mode: 'history',
+	scrollBehavior (to, from, savedPosition) {
+		if (to.hash) {
+			return window.scrollTo({
+				top: document.querySelector(to.hash).offsetTop,
+				behavior: 'smooth'
+			})
+		} else {
+			return { x: 0, y: 0 }
+		}
+	}
 });
 Vue.router = router;
 

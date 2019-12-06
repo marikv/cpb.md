@@ -58,6 +58,33 @@ var deletePhotoOrVideoFromGallery = function (id) {
 	}
 };
 
+
+var deleteFaq = function (id) {
+	if (confirm("Sunteti sigur ca doriti sa stergeti?")) {
+		$('#spinner').show();
+		$.post('/faq/delete', { id: id }, function (response) {
+			$('#spinner').hide();
+			$('#faq' + id).hide();
+		}).fail(function() {
+			alert( "error" );
+			$('#spinner').hide();
+		})
+	}
+};
+
+var deleteArticle = function (id) {
+	if (confirm("Sunteti sigur ca doriti sa stergeti?")) {
+		$('#spinner').show();
+		$.post('/article/delete', { id: id }, function (response) {
+			$('#spinner').hide();
+			$('#article' + id).hide();
+		}).fail(function() {
+			alert( "error" );
+			$('#spinner').hide();
+		})
+	}
+};
+
 var iter = 0;
 var interv = setInterval(() => {
 	var cl = '.tox.tox-silver-sink.tox-tinymce-aux > .tox-notifications-container';

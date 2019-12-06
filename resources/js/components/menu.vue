@@ -1,39 +1,39 @@
 <template>
 		<ul :id="id" class="site-menu">
 			<li>
-				<router-link to="/" v-scroll-to="{el: '#home-section'}">
-					<span v-if="lang === 'ru'">О нас</span>
+				<router-link :to="{ name: 'LandingPage', hash: '#topHeader' }" v-scroll-to="{el: '#topHeader'}">
 					<span v-if="lang === 'ro'">Despre noi</span>
+					<span v-if="lang === 'ru'">О нас</span>
 					<span v-if="lang === 'en'">About</span>
 				</router-link>
 			</li>
 			<li>
-				<a href="/#PhotoGallery" v-scroll-to="{el: '#PhotoGallery'}">
-					<span v-if="lang === 'ru'">Наша галерея</span>
+				<router-link :to="{ name: 'LandingPage', hash: '#PhotoGallery' }"  >
 					<span v-if="lang === 'ro'">Galeria Nostră</span>
+					<span v-if="lang === 'ru'">Наша галерея</span>
 					<span v-if="lang === 'en'">Our Gallery</span>
-				</a>
+				</router-link>
 			</li>
 			<li>
-				<a href="/#products">
-					<span v-if="lang === 'ru'">Каталог</span>
+				<router-link to="/categories">
 					<span v-if="lang === 'ro'">Catalog</span>
+					<span v-if="lang === 'ru'">Каталог</span>
 					<span v-if="lang === 'en'">Catalogue</span>
-				</a>
+				</router-link>
 			</li>
 			<li>
 				<router-link to="/news">
+					<span v-if="lang === 'ro'">Noutăți</span>
 					<span v-if="lang === 'ru'">Статьи</span>
-					<span v-if="lang === 'ro'">Articole</span>
 					<span v-if="lang === 'en'">News</span>
 				</router-link>
 			</li>
 			<li>
-				<a href="#footer" v-scroll-to="{el: '#footer'}">
+				<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
 					<span v-if="lang === 'ro'">Contacte</span>
 					<span v-if="lang === 'ru'">Контакты</span>
 					<span v-if="lang === 'en'">Contacts</span>
-				</a>
+				</router-link>
 			</li>
 			<li>
 				<a href="javascript:void(0)" @click.stop.prevent="showLangs=!showLangs">

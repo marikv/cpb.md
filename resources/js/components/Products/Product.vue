@@ -1,11 +1,12 @@
 <template>
-	<div id="news">
+	<div id="products">
 		<main>
 			<div class="container">
 				<div class="container__content">
+				
+					<article>
 					
-				
-				
+					</article>
 				
 				</div>
 			</div>
@@ -14,14 +15,17 @@
 </template>
 
 <script>
-
+ 
 	export default {
+		props: [
+			'product'
+		],
 		components: {
 		
 		},
 		data() {
 			return {
-			
+				categories: [],
 			};
 		},
 		computed: {
@@ -30,15 +34,11 @@
 			},
 		},
 		methods: {
-			loadArticles() {
-				this.$store.commit('setShowSpinner', true);
-				setTimeout(() => {
-					this.$store.commit('setShowSpinner', false);
-				}, 2000);
-			},
+		
 		},
 		mounted() {
-			this.loadArticles();
+		
 		}
 	}
 </script>
+

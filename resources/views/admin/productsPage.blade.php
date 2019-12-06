@@ -9,16 +9,27 @@
 
             <div class="col-md-12">
                 <button class="btn btn-primary" onclick="$('#addProduct').slideUp();$('#addCategory').slideDown();">Adauga o categorie nouă</button>
-                <button class="btn btn-primary" onclick="$('#addProduct').slideDown();$('#addCategory').slideUp();">Adauga un produs nou</button>
+                <a class="btn btn-primary" href="/admin/page/products?product=0&edit=1">Adauga un produs nou</a>
 
 
                 <div id="addCategory"
                      style="margin-top: 40px;display: {{ (Request::get('category') > 0 && $edit) ? '' : 'none' }};">
 
-                    <form action="/admin/category/add" method="post">
+                    <form action="/admin/category/add" enctype="multipart/form-data" method="post">
                         {{csrf_field()}}
 
                         <input type="hidden" name="cat_id" value="{{$edit && !empty($categoryEdit->id) ? $categoryEdit->id : ''}}" id="cat_id" />
+
+
+                        <div class="form-group row">
+                            <label for="name_ro" class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-10">
+                                <img id="cat_photo_img"
+                                     src="/uploads/{{$edit && !empty($categoryEdit->photo) ? $categoryEdit->photo : 'no-image.png'}}"
+                                     style="height: 100px;"/>
+                                <input type="file" name="cat_photo" id="cat_photo" placeholder=""/>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="cat_nume_ro" class="col-sm-2 col-form-label">Nume RO</label>
@@ -57,18 +68,18 @@
 
 
                 <div id="addProduct"
-                     style="margin-top: 40px;display: {{ (Request::get('product') > 0 && Request::get('edit') == 1) ? '' : 'none' }};">
+                     style="margin-top: 40px;display: {{ (Request::get('edit') == 1) ? '' : 'none' }};">
 
                     <form action="/admin/product/add" enctype="multipart/form-data" method="post">
                         {{csrf_field()}}
 
-                        <input type="hidden" name="id" value="{{$productEdit->id ?? ''}}" id="id" />
+                        <input type="hidden" name="id" value="{{$edit && !empty($productEdit->id) ? $productEdit->id : ''}}" id="id" />
 
 
                         <div class="form-group row">
                             <label for="name_ro" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
-                                <img id="photo_img" src="/uploads/{{$productEdit->photo ?? 'no-image.png'}}" style="height: 100px;"/>
+                                <img id="photo_img" src="/uploads/{{$edit && !empty($productEdit->photo) ? $productEdit->photo : 'no-image.png'}}" style="height: 100px;"/>
                                 <input type="file" name="photo" id="photo" placeholder=""/>
                             </div>
                         </div>
@@ -92,21 +103,21 @@
                             <label for="name_ro" class="col-sm-2 col-form-label">Nume RO</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name_ro"
-                                       value="{{$productEdit->name_ro ?? ''}}" id="name_ro" placeholder=""/>
+                                       value="{{$edit && !empty($productEdit->name_ro) ? $productEdit->name_ro : ''}}" id="name_ro" placeholder=""/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="name_ru" class="col-sm-2 col-form-label">Nume RU</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name_ru"
-                                       value="{{$productEdit->name_ru ?? ''}}" id="name_ru" placeholder=""/>
+                                       value="{{$edit && !empty($productEdit->name_ru) ? $productEdit->name_ru : ''}}" id="name_ru" placeholder=""/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="name_en" class="col-sm-2 col-form-label">Nume EN</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name_en"
-                                       value="{{$productEdit->name_en ?? ''}}" id="name_en" placeholder=""/>
+                                       value="{{$edit && !empty($productEdit->name_en) ? $productEdit->name_en : ''}}" id="name_en" placeholder=""/>
                             </div>
                         </div>
 
@@ -116,7 +127,7 @@
                             <label for="name_ro" class="col-sm-2 col-form-label">Text RO</label>
                             <div class="col-sm-10">
                                 <textarea rows="13" style="height: 500px" id="text_ro" name="text_ro" class="textarea-with-tinymce" >
-                                    {{$productEdit->text_ro ?? ''}}
+                                    {{$edit && !empty($productEdit->text_ro) ? $productEdit->text_ro : ''}}
                                 </textarea>
                             </div>
                         </div>
@@ -124,7 +135,7 @@
                             <label for="name_ro" class="col-sm-2 col-form-label">Text RU</label>
                             <div class="col-sm-10">
                                 <textarea rows="13" style="height: 500px" id="text_ru" name="text_ru" class="textarea-with-tinymce" >
-                                    {{$productEdit->text_ru ?? ''}}
+                                    {{$edit && !empty($productEdit->text_ru) ? $productEdit->text_ru : ''}}
                                 </textarea>
                             </div>
                         </div>
@@ -132,7 +143,7 @@
                             <label for="name_ro" class="col-sm-2 col-form-label">Text EN</label>
                             <div class="col-sm-10">
                                 <textarea rows="13" style="height: 500px" id="text_en" name="text_en" class="textarea-with-tinymce" >
-                                    {{$productEdit->text_en ?? ''}}
+                                    {{$edit && !empty($productEdit->text_en) ? $productEdit->text_en : ''}}
                                 </textarea>
                             </div>
                         </div>
@@ -157,10 +168,21 @@
                 <h3>Lista de Categorii</h3>
 
                 <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Nume</th>
+                        <th colspan="2"></th>
+                    </tr>
+                    </thead>
                 @foreach ($categoriesData as $item)
                         <tr id="cat{{ $item->id }}">
                             <td style="width: 20px">
                                 {{ $item->id }}
+                            </td>
+                            <td style="width: 40px">
+                                <img src="/uploads/{{ $item->photo }}" style="height: 40px;border-radius: 3px;"/>
                             </td>
                             <td>
                                 <a href="?category={{ $item->id }}" target="_self">
@@ -195,7 +217,7 @@
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Nume</th>
-                        <th colspan="2"?></th>
+                        <th colspan="2"></th>
                     </tr>
                     </thead>
                     @foreach ($productsData as $item)
@@ -229,17 +251,20 @@
     </div>
 
     <script>
-	    function readURL(input) {
+	    function readURL(input, n) {
 		    if (input.files && input.files[0]) {
 			    var reader = new FileReader();
 			    reader.onload = function(e) {
-				    $('#photo_img').attr('src', e.target.result);
+				    $('#'+n+'_img').attr('src', e.target.result);
 			    };
 			    reader.readAsDataURL(input.files[0]);
 		    }
 	    }
 	    $("#photo").change(function() {
-		    readURL(this);
+		    readURL(this, 'photo');
+	    });
+	    $("#cat_photo").change(function() {
+		    readURL(this, 'cat_photo');
 	    });
 
 

@@ -87,7 +87,7 @@
 		display: block;
 		position: absolute;
 		z-index: 999;
-		top: 11px;
+		top: 10px;
 		right: 30px;
 		-webkit-user-select: none;
 		user-select: none;
@@ -172,7 +172,6 @@
 	}
 	.top-header {
 		box-shadow: 0px 10px 16px rgba(84, 83, 83, 0.15);
-		/*position: absolute;*/
 		width: 100%;
 		z-index: 1;
 		background: white;
@@ -192,7 +191,7 @@
 		text-decoration: none;
 	}
 	.logo a img {
-		height: 50px;
+		height: 60px;
 		position: absolute;
 		top: 1px;
 	}
@@ -249,8 +248,11 @@
 			padding-left: 20px;
 		}
 		#menuMobileToggle {
-			right: 5px;
+			right: 12px;
 		}
+	}
+	.top-header {
+		height: 40px;
 	}
 	@media (min-width: 1000px) {
 		.site-navbar {
@@ -261,6 +263,9 @@
 			position: absolute;
 			top: -10px;
 			height: 125px;
+		}
+		.top-header {
+			height: auto;
 		}
 		
 		.site-navigation-mobile {
