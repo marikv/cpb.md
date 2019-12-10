@@ -85,6 +85,20 @@ var deleteArticle = function (id) {
 	}
 };
 
+
+var deletePdf = function (id) {
+	if (confirm("Sunteti sigur ca doriti sa stergeti?")) {
+		$('#spinner').show();
+		$.post('/pdf/delete', { id: id }, function (response) {
+			$('#spinner').hide();
+			$('#item' + id).hide();
+		}).fail(function() {
+			alert( "error" );
+			$('#spinner').hide();
+		})
+	}
+};
+
 var iter = 0;
 var interv = setInterval(() => {
 	var cl = '.tox.tox-silver-sink.tox-tinymce-aux > .tox-notifications-container';

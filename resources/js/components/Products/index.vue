@@ -16,6 +16,8 @@
 							</div>
 						</div>
 					</div>
+					
+					<Pdfs></Pdfs>
 				
 				</div>
 			</div>
@@ -24,10 +26,11 @@
 </template>
 
 <script>
- 
+
+	import Pdfs from '../LandingPage/Pdfs';
 	export default {
 		components: {
-		
+			Pdfs,
 		},
 		data() {
 			return {

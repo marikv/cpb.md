@@ -2,9 +2,9 @@
 	<div >
 		<HomeSection></HomeSection>
 		<PhotoGallery></PhotoGallery>
+		<Pdfs></Pdfs>
 		<FaqSection></FaqSection>
 		<Contacts></Contacts>
-		
 	</div>
 </template>
 
@@ -12,6 +12,7 @@
 
 	import HomeSection from './HomeSection';
 	import PhotoGallery from './PhotoGallery';
+	import Pdfs from './Pdfs';
 	import Contacts from './Contacts';
 	import FaqSection from './FaqSection';
 
@@ -21,6 +22,7 @@
 			FaqSection,
 			PhotoGallery,
 			Contacts,
+			Pdfs,
 		},
 		data() {
 			return {

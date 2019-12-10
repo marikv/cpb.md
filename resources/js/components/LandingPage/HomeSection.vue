@@ -56,9 +56,11 @@
 		},
 		mounted() {
 			const textH = document.getElementById('home-section__container-wrapper').offsetHeight;
-			const heightParalax = document.getElementById('paralax-home').offsetHeight;
+			const heightParalax = document.getElementById('paralax__wrapper').offsetHeight;
 			if (textH > heightParalax) {
+				document.getElementById('paralax__wrapper').style.height = (textH + 70) + 'px';
 				document.getElementById('paralax-home').style.height = (textH + 70) + 'px';
+				
 			}
 			window.addEventListener('scroll', this.updateScroll);
 		},

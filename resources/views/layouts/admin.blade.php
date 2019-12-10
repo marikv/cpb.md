@@ -95,6 +95,7 @@
                                     <a class="dropdown-item" href="/admin/page/photo-gallery">Foto Galerie</a>
                                     <a class="dropdown-item" href="/admin/page/video-gallery">Video Galerie</a>
                                     <a class="dropdown-item" href="/admin/page/faq">FAQ</a>
+                                    <a class="dropdown-item" href="/admin/page/pdf">PDF catalog</a>
                                 </div>
                             </li>
 
@@ -107,10 +108,30 @@
                                 <a class="nav-link" href="/admin/page/news">Noutăți</a>
                             </li>
 
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown2"
+                                   class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                >
+                                    Contacte <span class="caret"></span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/simplePage?id=1&edit=1">Lista Magazinelor</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin/page/settings">Settings</a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/file-manager">File Manager</a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" style="margin-left: 25px;"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

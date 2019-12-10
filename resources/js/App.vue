@@ -2,7 +2,7 @@
 	<div>
 		<Header></Header>
 		
-		<div class="paralax__wrapper">
+		<div id="paralax__wrapper" class="paralax__wrapper">
 			<parallax
 					id="paralax-home"
 					:fixed="false"

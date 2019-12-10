@@ -156,7 +156,7 @@
 	    background: #15304E;
 		background: linear-gradient(90deg, rgba(2, 0, 36, 0.8) 0%, rgba(9, 9, 121, 0.8) 35%, rgba(0, 116, 140, 0.8) 100%);
 		color: white;
-		padding: 50px 20px 80px 20px;
+		padding: 80px 20px 80px 20px;
 	}
 	
 	#footer .footer__title {
@@ -213,7 +213,7 @@
 	
 	@media (min-width: 1155px) {
 		#footer footer {
-			padding: 50px 0 80px 0;
+			padding: 100px 0 80px 0;
 		}
 	}
 	

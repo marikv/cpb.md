@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Category;
 use App\Models\Faq;
+use App\Models\Page;
+use App\Models\Pdf;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Settings;
@@ -42,10 +45,14 @@ class HomeController extends Controller
         $settingsData = Settings::getAll();
         $photos = Photo::orderBy('id', 'DESC')->get();
         $faqs = Faq::orderBy('id', 'DESC')->get();
+        $pdfs = Pdf::orderBy('id', 'DESC')->get();
+        $magazine = Page::find(1);
 
         return view('layouts.landing')
             ->with('photos', $photos)
             ->with('faqs', $faqs)
+            ->with('pdfs', $pdfs)
+            ->with('magazine', $magazine)
             ->with('settingsData', $settingsData);
     }
 
@@ -76,6 +83,14 @@ class HomeController extends Controller
         return $this->landingPage();
     }
 
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function landingPageCategory()
+    {
+        return $this->landingPage();
+    }
+
     public static function getLang()
     {
         $lang = Session::get('lang');
@@ -101,6 +116,16 @@ class HomeController extends Controller
         ]);
     }
 
+    public function getArticles()
+    {
+        $list = Article::orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $list
+        ]);
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -108,12 +133,28 @@ class HomeController extends Controller
     public function getCategory(Request $request)
     {
         $categoryData = Category::find($request->id);
-        $productsData = Product::where('category_id', $request->id)->get();
+        //$productsData = Product::where('category_id', $request->id)->get();
 
         return response()->json([
             'success' => true,
             'data' => [
                 'categoryData' => $categoryData,
+                //'productsData' => $productsData
+            ]
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getProducts(Request $request)
+    {
+        $productsData = Product::where('category_id', $request->category_id)->orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
                 'productsData' => $productsData
             ]
         ]);

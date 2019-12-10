@@ -61,14 +61,22 @@
                         ease: Bounce.easeOut
                     });
                 }
+            },
+            getContent() {
+                this.contents = window.faqs.map(faq => ({
+                    title: faq[`query_${this.lang}`],
+                    description: faq[`answer_${this.lang}`],
+                    active: false,
+                }));
+            },
+        },
+        watch: {
+            lang() {
+                this.getContent();
             }
         },
         mounted() {
-            this.contents = window.faqs.map(faq => ({
-		        title: faq[`query_${this.lang}`],
-		        description: faq[`answer_${this.lang}`],
-		        active: false,
-	        }));
+            this.getContent();
         }
     }
 </script>

@@ -27,6 +27,7 @@ Vue.use(VueScrollTo, {
 
 import LandingPage from './components/LandingPage';
 import News from './components/News';
+import Article from './components/News/Article';
 import Categories from './components/Products';
 import Category from './components/Products/ProductsList';
 import Product from './components/Products/Product';
@@ -43,6 +44,11 @@ const router = new VueRouter({
 		{
 			path: '/news',
 			component: News,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/article/:id',
+			component: Article,
 			meta: { scrollToTop: true },
 		},
 		{

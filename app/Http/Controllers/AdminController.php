@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Pdf;
 use App\Models\Photo;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Faq;
 use App\Models\Article;
@@ -48,11 +50,107 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+    public function simplePage(Request $request)
+    {
+        $data = Page::where('alias', $request->alisa)->first();
+
+        return view('admin.simplePage')->with('data', $data);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function landingPage()
     {
         $settingsData = Settings::getAll();
 
         return view('admin.landingPage')->with('settingsData', $settingsData);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function pdfCatalogsPage(Request $request)
+    {
+        $pdfsData = Pdf::orderBy('id', 'DESC')->get();
+
+        return view('admin.pdfCatalogsPage')
+            ->with('edit', !empty($request->get('edit')))
+            ->with('pdfsData', $pdfsData);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addPdf(Request $request)
+    {
+        if ($request->id) {
+            $model = Pdf::find($request->id);
+        } else {
+            $model = new Pdf();
+        }
+
+        if($request->file('photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'.'.$request->file('photo')->extension();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+        if($request->file('pdf')) {
+            $request->validate([
+                'file' => 'mimes:pdf|max:204800',
+            ]);
+            $fileName = date('YmdHis').'_CATALOG_'.$request->file('pdf')->getClientOriginalName().'.'.$request->file('pdf')->extension();
+            $request->file('pdf')->move(public_path('uploads'), $fileName);
+            $model->pdf = $fileName;
+        }
+
+        $model->name_ro = $request->name_ro;
+        $model->name_ru = $request->name_ru;
+        $model->name_en = $request->name_en;
+
+        $model->save();
+
+        return redirect('/admin/page/pdf?pdf=' . $model->id .'&edit=1');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function simplePageSave(Request $request)
+    {
+        if ($request->id) {
+            $model = Page::find($request->id);
+        } else {
+            $model = new Page();
+        }
+
+        if($request->file('photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'.'.$request->file('photo')->extension();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+
+        $model->name_ro = $request->name_ro;
+        $model->name_ru = $request->name_ru;
+        $model->name_en = $request->name_en;
+
+        $model->text_ro = $request->text_ro;
+        $model->text_ru = $request->text_ru;
+        $model->text_en = $request->text_en;
+
+        $model->save();
+
+        return redirect('/admin/page/simplePage?id=' . $model->id .'&edit=1');
     }
 
 
@@ -219,6 +317,17 @@ class AdminController extends Controller
     {
         if ($request->id) {
             $model = \App\Models\Category::find($request->id);
+            $delete = $model->delete();
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function deletePdf(Request $request)
+    {
+        if ($request->id) {
+            $model = \App\Models\Pdf::find($request->id);
             $delete = $model->delete();
         }
     }

@@ -8,6 +8,8 @@
 		window.settingsData = [].concat(@json($settingsData))[0];
 		window.photos = [].concat(@json($photos));
 		window.faqs = [].concat(@json($faqs));
+		window.pdfs = [].concat(@json($pdfs));
+		window.magazine = [].concat(@json($magazine))[0];
     </script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,7 +33,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     {{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=cyrillic" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=cyrillic" rel="stylesheet">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
