@@ -23,9 +23,9 @@
 				<div class="overlay" @click.self="isOpen = false;">
 					<div class="modal">
 						<img src="/img/cancel.svg" class="modal-close" @click.self="isOpen = false;"/>
-
-						<img :src="`/uploads/${activeItem.photo}`" class="products__product-image"/>
+						
 						<h1>{{ activeItem[`name_${lang}`] }}</h1>
+						<img :src="`/uploads/${activeItem.photo}`" class="products__product-image"/>
 						<div v-html="activeItem[`text_${lang}`]"></div>
 						
 					</div>
@@ -89,10 +89,10 @@
 
 <style>
 	.products__product-image {
-		min-width: 240px;
-		width: 30%;
-		float: left;
-		margin: 0 30px 10px 0;
+		/*min-width: 240px;*/
+		width: 100%;
+		/*float: left;*/
+		margin: 20px 0;
 		border-radius: 10px;
 	}
 	.modal-close {

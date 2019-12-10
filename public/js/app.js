@@ -5684,7 +5684,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.products__product-image {\n\tmin-width: 240px;\n\twidth: 30%;\n\tfloat: left;\n\tmargin: 0 30px 10px 0;\n\tborder-radius: 10px;\n}\n.modal-close {\n\twidth: 18px;\n\tposition: absolute;\n\tright: 18px;\n\ttop: 18px;\n\tcursor: pointer;\n}\n.fadeIn-enter .overlay,\n.fadeIn-leave-active .overlay {\n\topacity: 0;\n\ttransition: all 0.2s step-end;\n}\n.fadeIn-enter .modal,\n.fadeIn-leave-active .modal {\n\ttransform: scale(0.3);\n}\n.overlay {\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\tbottom: 0;\n\tright: 0;\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\twidth: 100%;\n\theight: 100%;\n\tbackground: rgba(0, 0, 0, 0.3);\n\tz-index: 999;\n\ttransition: all 0.2s ease;\n}\n.modal {\n\tposition: relative;\n\tmax-width: 800px;\n\tmax-height: calc(100vh - 80px);\n\toverflow: auto;\n\twidth: 100%;\n\tmargin: 0 auto;\n\tpadding: 30px;\n\tbackground-color: #fff;\n\tborder-radius: 10px;\n\tbox-shadow: 0 2px 8px 3px rgba(164, 164, 164, 0.41);\n\ttransition: all 0.2s ease-in;\n}\n", ""]);
+exports.push([module.i, "\n.products__product-image {\n\t/*min-width: 240px;*/\n\twidth: 100%;\n\t/*float: left;*/\n\tmargin: 20px 0;\n\tborder-radius: 10px;\n}\n.modal-close {\n\twidth: 18px;\n\tposition: absolute;\n\tright: 18px;\n\ttop: 18px;\n\tcursor: pointer;\n}\n.fadeIn-enter .overlay,\n.fadeIn-leave-active .overlay {\n\topacity: 0;\n\ttransition: all 0.2s step-end;\n}\n.fadeIn-enter .modal,\n.fadeIn-leave-active .modal {\n\ttransform: scale(0.3);\n}\n.overlay {\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\tbottom: 0;\n\tright: 0;\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\twidth: 100%;\n\theight: 100%;\n\tbackground: rgba(0, 0, 0, 0.3);\n\tz-index: 999;\n\ttransition: all 0.2s ease;\n}\n.modal {\n\tposition: relative;\n\tmax-width: 800px;\n\tmax-height: calc(100vh - 80px);\n\toverflow: auto;\n\twidth: 100%;\n\tmargin: 0 auto;\n\tpadding: 30px;\n\tbackground-color: #fff;\n\tborder-radius: 10px;\n\tbox-shadow: 0 2px 8px 3px rgba(164, 164, 164, 0.41);\n\ttransition: all 0.2s ease-in;\n}\n", ""]);
 
 // exports
 
@@ -13140,14 +13140,14 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _c("h1", [
+                      _vm._v(_vm._s(_vm.activeItem["name_" + _vm.lang]))
+                    ]),
+                    _vm._v(" "),
                     _c("img", {
                       staticClass: "products__product-image",
                       attrs: { src: "/uploads/" + _vm.activeItem.photo }
                     }),
-                    _vm._v(" "),
-                    _c("h1", [
-                      _vm._v(_vm._s(_vm.activeItem["name_" + _vm.lang]))
-                    ]),
                     _vm._v(" "),
                     _c("div", {
                       domProps: {
