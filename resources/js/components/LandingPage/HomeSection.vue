@@ -4,7 +4,10 @@
 		<div id="home-section__container-wrapper" class="home-section__container-wrapper">
 			<div class="container home-section__container">
 				<div class="home-section__title" v-html="home_section_title"></div>
-				<div class="home-section__text" :style="{'opacity': opacity}" v-html="home_section_text"></div>
+				
+				<transition name="slide-down-fade2">
+					<div class="home-section__text" v-if="show" :style="{'opacity': opacity}" v-html="home_section_text"></div>
+				</transition>
 			</div>
 		</div>
 	</div>
@@ -19,7 +22,8 @@
 		},
 		data() {
 			return {
-				scrollPosition: null
+				scrollPosition: null,
+				show: false,
 			};
 		},
 		computed: {
@@ -47,25 +51,48 @@
 				this.scrollPosition = window.scrollY;
 				const topHeader = document.getElementById('topHeader');
 				const h = topHeader.offsetHeight;
-				if (this.scrollPosition > 330) {
+				if (this.scrollPosition > 300) {
 					topHeader.style.position = 'fixed';
 				} else {
 					topHeader.style.position = 'absolute';
+					setTimeout(() => {
+						this.show = true;
+						setTimeout(() => {
+							this.updateParalaxHeight();
+						}, 500);
+					}, 500);
 				}
-			}
+			},
+			updateParalaxHeight() {
+				const textH = document.getElementById('home-section__container-wrapper').offsetHeight;
+				const heightParalax = document.getElementById('paralax__wrapper').offsetHeight;
+				if (textH > heightParalax) {
+					document.getElementById('paralax__wrapper').style.height = (textH + 70) + 'px';
+					document.getElementById('paralax-home').style.height = (textH + 70) + 'px';
+				}
+			},
 		},
 		mounted() {
-			const textH = document.getElementById('home-section__container-wrapper').offsetHeight;
-			const heightParalax = document.getElementById('paralax__wrapper').offsetHeight;
-			if (textH > heightParalax) {
-				document.getElementById('paralax__wrapper').style.height = (textH + 70) + 'px';
-				document.getElementById('paralax-home').style.height = (textH + 70) + 'px';
-				
-			}
+			this.updateParalaxHeight();
 			window.addEventListener('scroll', this.updateScroll);
+			this.updateScroll();
 		},
 		destroy() {
 			window.removeEventListener('scroll', this.updateScroll)
 		},
 	}
 </script>
+
+<style>
+	.slide-down-fade2-enter-active {
+		transition: all .3s ease;
+	}
+	.slide-down-fade2-leave-active {
+		transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
+	.slide-down-fade2-enter, .slide-down-fade2-leave-to
+		/* .slide-fade-leave-active до версии 2.1.8 */ {
+		transform: translateY(-260px);
+		opacity: 0;
+	}
+</style>

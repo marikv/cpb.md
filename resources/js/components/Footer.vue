@@ -7,15 +7,43 @@
 				
 				<div>
 					
-					
 					<div class="footer__content-100" style="margin-bottom: 15px;">
-						<a href="#">Despre noi</a>
+						<router-link :to="{ name: 'LandingPage', hash: '#topHeader' }" v-scroll-to="{el: '#topHeader'}">
+							<span v-if="lang === 'ro'">Despre noi</span>
+							<span v-if="lang === 'ru'">О нас</span>
+							<span v-if="lang === 'en'">About</span>
+						</router-link>
 					</div>
 					<div class="footer__content-100" style="margin-bottom: 15px;">
 						<a href="#">Articole</a>
 					</div>
 					<div class="footer__content-100" style="margin-bottom: 15px;">
-						<a href="#">Contacte</a>
+						<router-link :to="{ name: 'LandingPage', hash: '#PhotoGallery' }"  >
+							<span v-if="lang === 'ro'">Galeria Noastră</span>
+							<span v-if="lang === 'ru'">Наша галерея</span>
+							<span v-if="lang === 'en'">Our Gallery</span>
+						</router-link>
+					</div>
+					<div class="footer__content-100" style="margin-bottom: 15px;">
+						<router-link to="/categories">
+							<span v-if="lang === 'ro'">Catalog</span>
+							<span v-if="lang === 'ru'">Каталог</span>
+							<span v-if="lang === 'en'">Catalogue</span>
+						</router-link>
+					</div>
+					<div class="footer__content-100" style="margin-bottom: 15px;">
+						<router-link to="/news">
+							<span v-if="lang === 'ro'">Noutăți</span>
+							<span v-if="lang === 'ru'">Статьи</span>
+							<span v-if="lang === 'en'">News</span>
+						</router-link>
+					</div>
+					<div class="footer__content-100" style="margin-bottom: 15px;">
+						<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
+							<span v-if="lang === 'ro'">Contacte</span>
+							<span v-if="lang === 'ru'">Контакты</span>
+							<span v-if="lang === 'en'">Contacts</span>
+						</router-link>
 					</div>
 					
 					<div v-if="lang === 'ru'" class="footer__title">
@@ -63,6 +91,8 @@
 								<img class="flag" src="/img/ro.svg"></div>
 							<div class="footer__lang-item" :class="{'active': lang === 'ru'}" @click="setLang('ru')">
 								<img class="flag" src="/img/ru.svg"></div>
+							<div class="footer__lang-item" :class="{'active': lang === 'en'}" @click="setLang('en')">
+								<img class="flag" src="/img/en.svg"></div>
 						</div>
 					
 					</div>
@@ -79,8 +109,8 @@
 								{{phone2}}
 							</a>
 						</div>
-						<div class="footer__content-100">
-							<a href="mailto:cereri@gmail.com">
+						<div class="footer__content-100" style="margin: 10px 0;">
+							<a href="mailto:info@cpb.md">
 								info@cpb.md
 							</a>
 						</div>
@@ -97,8 +127,11 @@
 </template>
 
 <script>
+	import menu from './menu';
 	export default {
-		components: {},
+		components: {
+			menu,
+		},
 		computed: {
 			lang() {
 				return this.$store.getters.getLang;
@@ -122,7 +155,9 @@
 </script>
 
 <style>
-	
+	#footer {
+		font-weight: 200;
+	}
 	#footer .footer__langs-container {
 		display: flex;
 		width: 100%;

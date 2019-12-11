@@ -9,7 +9,7 @@
 			</li>
 			<li>
 				<router-link :to="{ name: 'LandingPage', hash: '#PhotoGallery' }"  >
-					<span v-if="lang === 'ro'">Galeria Nostră</span>
+					<span v-if="lang === 'ro'">Galeria Noastră</span>
 					<span v-if="lang === 'ru'">Наша галерея</span>
 					<span v-if="lang === 'en'">Our Gallery</span>
 				</router-link>
