@@ -88,8 +88,8 @@
 	}
 </script>
 
-
 <style>
+
 	.products__product-image-wrapper {
 		display: flex;
 		justify-content: center;
