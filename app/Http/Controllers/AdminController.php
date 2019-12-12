@@ -233,13 +233,20 @@ class AdminController extends Controller
     public function productsPage(Request $request)
     {
         $categoriesData = Category::orderBy('sort', 'ASC')->get();
-        $productsData = Product::orderBy('sort', 'ASC')->get();
+        $productsData = Product::orderBy('sort', 'ASC')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name_ro as category_name')
+            ->get();
         $categoryEdit = new \stdClass();
         $productEdit = new \stdClass();
 
         $cat = $request->get('category');
         if (!empty($cat)) {
-            $productsData = Product::where('category_id', $cat)->orderBy('id', 'DESC')->get();
+            $productsData = Product::where('category_id', $cat)
+                ->select('products.*', 'categories.name_ro as category_name')
+                ->join('categories', 'products.category_id', '=', 'categories.id')
+                ->orderBy('sort', 'ASC')
+                ->get();
             $categoryEdit = Category::find($cat);
         }
 

@@ -228,6 +228,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Foto</th>
+                        <th>Categorie</th>
                         <th>Nume</th>
                         <th>Sort</th>
                         <th colspan="2"></th>
@@ -240,6 +241,10 @@
                             </td>
                             <td style="width: 40px">
                                 <img src="/uploads/{{ $item->photo }}" style="height: 40px;border-radius: 3px;"/>
+                            </td>
+
+                            <td>
+                                {{$item->category_name}}
                             </td>
                             <td>
                                 <a href="/#/products/{{ $item->id }}" target="_blank">
