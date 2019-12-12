@@ -25,7 +25,9 @@
 						<img src="/img/cancel.svg" class="modal-close" @click.self="isOpen = false;"/>
 						
 						<h1>{{ activeItem[`name_${lang}`] }}</h1>
-						<img :src="`/uploads/${activeItem.photo}`" class="products__product-image"/>
+						<div class="products__product-image-wrapper">
+							<img :src="`/uploads/${activeItem.photo}`" class="products__product-image"/>
+						</div>
 						<div v-html="activeItem[`text_${lang}`]"></div>
 						
 					</div>
@@ -88,11 +90,15 @@
 
 
 <style>
+	.products__product-image-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.products__product-image {
-		/*min-width: 240px;*/
-		width: 100%;
-		/*float: left;*/
-		margin: 20px 0;
+		margin: 0 auto;
+		padding: 0 auto;
+		max-height: 70vh;
 		border-radius: 10px;
 	}
 	.modal-close {

@@ -173,6 +173,7 @@
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Nume</th>
+                        <th>Sort</th>
                         <th colspan="2"></th>
                     </tr>
                     </thead>
@@ -188,6 +189,9 @@
                                 <a href="?category={{ $item->id }}" target="_self">
                                    {{$item->name_ro}}
                                 </a>
+                            </td>
+                            <td style="width: 20px;">
+                                <input type="text" width="30">
                             </td>
                             <td style="width: 20px;">
                                 <a href="?category={{ $item->id }}&edit=1" style="color: green;margin:0 20px;">
@@ -217,6 +221,7 @@
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Nume</th>
+                        <th>Sort</th>
                         <th colspan="2"></th>
                     </tr>
                     </thead>
@@ -232,6 +237,9 @@
                                 <a href="/#/products/{{ $item->id }}" target="_blank">
                                     {{$item->name_ro}}
                                 </a>
+                            </td>
+                            <td style="width: 20px;">
+                                <input type="text" width="30">
                             </td>
                             <td style="width: 20px;">
                                 <a href="?product={{ $item->id }}&edit=1" style="color: green;margin:0 20px;">
