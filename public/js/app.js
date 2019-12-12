@@ -2387,12 +2387,17 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     updateParalaxHeight: function updateParalaxHeight() {
-      var textH = document.getElementById('home-section__container-wrapper').offsetHeight;
-      var heightParalax = document.getElementById('paralax__wrapper').offsetHeight;
+      var el = document.getElementById('home-section__container-wrapper');
+      var el2 = document.getElementById('paralax__wrapper');
 
-      if (textH > heightParalax) {
-        document.getElementById('paralax__wrapper').style.height = textH + 70 + 'px';
-        document.getElementById('paralax-home').style.height = textH + 70 + 'px';
+      if (el && el2) {
+        var textH = el.offsetHeight;
+        var heightParalax = el2.offsetHeight;
+
+        if (textH > heightParalax) {
+          el2.style.height = textH + 70 + 'px';
+          document.getElementById('paralax-home').style.height = textH + 70 + 'px';
+        }
       }
     }
   },

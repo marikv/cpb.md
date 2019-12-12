@@ -64,11 +64,15 @@
 				}
 			},
 			updateParalaxHeight() {
-				const textH = document.getElementById('home-section__container-wrapper').offsetHeight;
-				const heightParalax = document.getElementById('paralax__wrapper').offsetHeight;
-				if (textH > heightParalax) {
-					document.getElementById('paralax__wrapper').style.height = (textH + 70) + 'px';
-					document.getElementById('paralax-home').style.height = (textH + 70) + 'px';
+				const el = document.getElementById('home-section__container-wrapper');
+				const el2 = document.getElementById('paralax__wrapper');
+				if (el && el2) {
+					const textH = el.offsetHeight;
+					const heightParalax = el2.offsetHeight;
+					if (textH > heightParalax) {
+						el2.style.height = (textH + 70) + 'px';
+						document.getElementById('paralax-home').style.height = (textH + 70) + 'px';
+					}
 				}
 			},
 		},
