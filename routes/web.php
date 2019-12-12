@@ -39,6 +39,7 @@ Route::get('/adm', 'AdminController@index')->name('adm');
 Route::get('/register', 'AdminController@index')->name('registerAdmin');
 Route::get('/home', 'AdminController@index')->name('homeAdmin');
 
+Route::post('/admin/sort/edit', 'AdminController@sortEdit')->name('sortEdit');
 Route::post('/admin/simplePage/save', 'AdminController@simplePageSave')->name('simplePageSave');
 Route::get('/admin/page/simplePage', 'AdminController@simplePage')->name('simplePage');
 Route::get('/admin/page/products', 'AdminController@productsPage')->name('productsPage');

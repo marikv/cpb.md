@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     public function getCategories()
     {
-        $list = Category::orderBy('id', 'DESC')->get();
+        $list = Category::orderBy('sort', 'ASC')->get();
 
         return response()->json([
             'success' => true,
@@ -150,7 +150,7 @@ class HomeController extends Controller
      */
     public function getProducts(Request $request)
     {
-        $productsData = Product::where('category_id', $request->category_id)->orderBy('id', 'DESC')->get();
+        $productsData = Product::where('category_id', $request->category_id)->orderBy('sort', 'ASC')->get();
 
         return response()->json([
             'success' => true,

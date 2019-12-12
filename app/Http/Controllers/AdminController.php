@@ -154,6 +154,26 @@ class AdminController extends Controller
     }
 
 
+    public function sortEdit(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'type' => 'required',
+            'value' => 'required',
+        ]);
+        if ($request->id) {
+            if ($request->type == 'categories') {
+                $model = Category::find($request->id);
+            }
+            if ($request->type == 'products') {
+                $model = Product::find($request->id);
+            }
+            if (!empty($model)) {
+                $model->sort = intval($request->value);
+                $model->save();
+            }
+        }
+    }
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -212,8 +232,8 @@ class AdminController extends Controller
      */
     public function productsPage(Request $request)
     {
-        $categoriesData = Category::orderBy('id', 'DESC')->get();
-        $productsData = Product::orderBy('id', 'DESC')->get();
+        $categoriesData = Category::orderBy('sort', 'ASC')->get();
+        $productsData = Product::orderBy('sort', 'ASC')->get();
         $categoryEdit = new \stdClass();
         $productEdit = new \stdClass();
 

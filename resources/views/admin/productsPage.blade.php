@@ -190,8 +190,16 @@
                                    {{$item->name_ro}}
                                 </a>
                             </td>
-                            <td style="width: 20px;">
-                                <input type="text" width="30">
+                            <td style="width: 140px;">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" style="text-align: right"
+                                           width="30"
+                                           id="categories_sort_{{ $item->id }}"
+                                           value="{{ $item->sort }}">
+                                    <div class="input-group-append">
+                                        <button onclick="saveSort('categories', {{ $item->id }})" class="btn btn-info">Save</button>
+                                    </div>
+                                </div>
                             </td>
                             <td style="width: 20px;">
                                 <a href="?category={{ $item->id }}&edit=1" style="color: green;margin:0 20px;">
@@ -238,8 +246,15 @@
                                     {{$item->name_ro}}
                                 </a>
                             </td>
-                            <td style="width: 20px;">
-                                <input type="text" width="30">
+                            <td style="width: 140px;">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" style="text-align: right" width="30"
+                                           id="products_sort_{{ $item->id }}"
+                                           value="{{ $item->sort }}">
+                                    <div class="input-group-append">
+                                        <button onclick="saveSort('products', {{ $item->id }})" class="btn btn-info">Save</button>
+                                    </div>
+                                </div>
                             </td>
                             <td style="width: 20px;">
                                 <a href="?product={{ $item->id }}&edit=1" style="color: green;margin:0 20px;">
@@ -259,6 +274,14 @@
     </div>
 
     <script>
+        function saveSort(type, id) {
+	        $('#spinner').show();
+	        $.post('/admin/sort/edit', { id: id, type: type, value: $('#' + type + '_sort_' + id).val() }, function (response) {
+		        $('#spinner').hide();
+	        }).fail(function() {
+		        $('#spinner').hide();
+	        })
+        }
 	    function readURL(input, n) {
 		    if (input.files && input.files[0]) {
 			    var reader = new FileReader();
