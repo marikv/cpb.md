@@ -39,14 +39,11 @@
 </template>
 
 <script>
- 
 	export default {
 		props: [
 			'category_id',
 		],
-		components: {
-		
-		},
+		components: {},
 		data() {
 			return {
 				activeItem: {
@@ -87,64 +84,3 @@
 		}
 	}
 </script>
-
-<style>
-
-	.products__product-image-wrapper {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.products__product-image {
-		margin: 0 auto;
-		padding: 0 auto;
-		max-height: 70vh;
-		border-radius: 10px;
-	}
-	.modal-close {
-		width: 18px;
-		position: absolute;
-		right: 18px;
-		top: 18px;
-		cursor: pointer;
-	}
-	
-	
-	.fadeIn-enter .overlay,
-	.fadeIn-leave-active .overlay {
-		opacity: 0;
-		transition: all 0.2s step-end;
-	}
-	.fadeIn-enter .modal,
-	.fadeIn-leave-active .modal {
-		transform: scale(0.3);
-	}
-	.overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.3);
-		z-index: 999;
-		transition: all 0.2s ease;
-	}
-	.modal {
-		position: relative;
-		max-width: 800px;
-		max-height: calc(100vh - 80px);
-		overflow: auto;
-		width: 100%;
-		margin: 0 auto;
-		padding: 30px;
-		background-color: #fff;
-		border-radius: 10px;
-		box-shadow: 0 2px 8px 3px rgba(164, 164, 164, 0.41);
-		transition: all 0.2s ease-in;
-	}
-</style>
