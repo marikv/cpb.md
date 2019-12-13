@@ -533,7 +533,7 @@ h2 {
   font-size: 34px;
   position: relative;
   text-align: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   color: #FFFFFF;
