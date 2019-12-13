@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v10.42 
-MySQL - 8.0.12 : Database - cpb
+SQLyog Professional v10.42 
+MySQL - 8.0.15 : Database - cpb_bd
 *********************************************************************
 */
 
@@ -18,22 +18,22 @@ DROP TABLE IF EXISTS `articles`;
 
 CREATE TABLE `articles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_ro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_ro` text COLLATE utf8mb4_unicode_ci,
-  `text_ru` text COLLATE utf8mb4_unicode_ci,
-  `text_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_en` text COLLATE utf8mb4_unicode_ci,
-  `photo` text COLLATE utf8mb4_unicode_ci,
+  `name_ro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `photo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -49,30 +49,31 @@ DROP TABLE IF EXISTS `categories`;
 
 CREATE TABLE `categories` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_ro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_ro` text COLLATE utf8mb4_unicode_ci,
-  `text_ru` text COLLATE utf8mb4_unicode_ci,
-  `text_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_en` text COLLATE utf8mb4_unicode_ci,
+  `name_ro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `categories` */
 
-insert  into `categories`(`id`,`name_ro`,`name_ru`,`name_en`,`text_ro`,`text_ru`,`text_en`,`meta_title_ro`,`meta_title_ru`,`meta_title_en`,`meta_keywords_ro`,`meta_keywords_ru`,`meta_keywords_en`,`meta_description_ro`,`meta_description_ru`,`meta_description_en`,`created_at`,`updated_at`,`photo`) values (1,'Produse de panificație','Хлебобулочные изделия','Bakery products',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:21:00','2019-12-05 12:55:52','20191205125552.jpeg'),(2,'Cracker','Крекеры','Crackers',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:21:15','2019-12-05 12:57:06','20191205125706.jpeg'),(4,'Biscuiți','Печенье','Biscuit',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:29:18','2019-12-05 12:57:59','20191205125759.jpeg'),(5,'Pesmeți','Сухари','Rusk',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:44:34','2019-12-05 12:59:08','20191205125908.jpeg'),(6,'Covrigei','Сушки','Bagels',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-12-05 13:00:13','2019-12-05 13:00:13','20191205130013.jpeg');
+insert  into `categories`(`id`,`name_ro`,`name_ru`,`name_en`,`text_ro`,`text_ru`,`text_en`,`meta_title_ro`,`meta_title_ru`,`meta_title_en`,`meta_keywords_ro`,`meta_keywords_ru`,`meta_keywords_en`,`meta_description_ro`,`meta_description_ru`,`meta_description_en`,`created_at`,`updated_at`,`photo`,`sort`) values (1,'Produse de panificație','Хлебобулочные изделия','Bakery products',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:21:00','2019-12-12 11:26:19','20191205125552.jpeg',1),(2,'Cracker','Крекеры','Crackers',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:21:15','2019-12-13 09:46:27','20191213094627.jpeg',2),(4,'Biscuiți','Печенье','Biscuit',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:29:18','2019-12-12 11:26:16','20191205125759.jpeg',3),(5,'Pesmeți','Сухари','Rusk',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-11-29 16:44:34','2019-12-12 11:26:14','20191205125908.jpeg',4),(6,'Covrigei','Сушки','Bagels',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-12-05 13:00:13','2019-12-12 11:26:12','20191205130013.jpeg',5);
 
 /*Table structure for table `failed_jobs` */
 
@@ -96,12 +97,12 @@ DROP TABLE IF EXISTS `faqs`;
 
 CREATE TABLE `faqs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `query_ro` text COLLATE utf8mb4_unicode_ci,
-  `query_ru` text COLLATE utf8mb4_unicode_ci,
-  `query_en` text COLLATE utf8mb4_unicode_ci,
-  `answer_ro` text COLLATE utf8mb4_unicode_ci,
-  `answer_ru` text COLLATE utf8mb4_unicode_ci,
-  `answer_en` text COLLATE utf8mb4_unicode_ci,
+  `query_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `query_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `query_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `answer_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `answer_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `answer_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -120,11 +121,11 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
-insert  into `migrations`(`id`,`migration`,`batch`) values (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_11_20_135617_create_settings',2),(5,'2019_11_28_165443_create_photos_table',3),(8,'2019_11_29_151246_create_categories_table',4),(9,'2019_11_29_151257_create_products_table',4),(10,'2019_12_03_205636_create_faqs_table',5),(11,'2019_12_04_000000_create_articles_table',6),(12,'2019_12_05_124346_add_photo_to_categories',7),(13,'2019_12_09_183939_create_pdfs_table',8),(14,'2019_12_09_195659_create_pages_table',9);
+insert  into `migrations`(`id`,`migration`,`batch`) values (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_11_20_135617_create_settings',2),(5,'2019_11_28_165443_create_photos_table',3),(8,'2019_11_29_151246_create_categories_table',4),(9,'2019_11_29_151257_create_products_table',4),(10,'2019_12_03_205636_create_faqs_table',5),(11,'2019_12_04_000000_create_articles_table',6),(12,'2019_12_05_124346_add_photo_to_categories',7),(13,'2019_12_09_183939_create_pdfs_table',8),(14,'2019_12_09_195659_create_pages_table',9),(15,'2019_12_12_110322_add_column_sort_to_products',10),(16,'2019_12_12_110618_add_column_sort_to_categories',10);
 
 /*Table structure for table `pages` */
 
@@ -132,22 +133,22 @@ DROP TABLE IF EXISTS `pages`;
 
 CREATE TABLE `pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_ro` text COLLATE utf8mb4_unicode_ci,
-  `text_ru` text COLLATE utf8mb4_unicode_ci,
-  `text_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_en` text COLLATE utf8mb4_unicode_ci,
+  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -176,11 +177,11 @@ DROP TABLE IF EXISTS `pdfs`;
 
 CREATE TABLE `pdfs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_ro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pdf` text COLLATE utf8mb4_unicode_ci,
-  `photo` text COLLATE utf8mb4_unicode_ci,
+  `name_ro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `photo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -196,7 +197,7 @@ DROP TABLE IF EXISTS `photos`;
 
 CREATE TABLE `photos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `path` text COLLATE utf8mb4_unicode_ci,
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `type` int(11) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -215,30 +216,31 @@ CREATE TABLE `products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` bigint(20) DEFAULT NULL,
   `price` double DEFAULT NULL,
-  `name_ro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_ro` text COLLATE utf8mb4_unicode_ci,
-  `text_ru` text COLLATE utf8mb4_unicode_ci,
-  `text_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_title_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords_en` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ro` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_ru` text COLLATE utf8mb4_unicode_ci,
-  `meta_description_en` text COLLATE utf8mb4_unicode_ci,
-  `photo` text COLLATE utf8mb4_unicode_ci,
+  `name_ro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_title_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `photo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `products` */
 
-insert  into `products`(`id`,`category_id`,`price`,`name_ro`,`name_ru`,`name_en`,`text_ro`,`text_ru`,`text_en`,`meta_title_ro`,`meta_title_ru`,`meta_title_en`,`meta_keywords_ro`,`meta_keywords_ru`,`meta_keywords_en`,`meta_description_ro`,`meta_description_ru`,`meta_description_en`,`photo`,`created_at`,`updated_at`) values (1,1,NULL,'Piine buna','Хлеб вкусный','Good bread','<p>tare buna <strong>afgs</strong>dfg</p>','<p>хроший х<strong>ле</strong>б</p>','<p>verry nice&nbsp;</p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191130111136.jpeg','2019-11-30 07:33:54','2019-12-05 13:19:39'),(2,1,NULL,'Baton','Батон','Bathons',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191205132129.jpeg','2019-12-05 13:21:29','2019-12-05 13:21:29'),(3,1,NULL,'Pâine Sănătate','Хлеб Сэнэтате','Bread Sanatate','<p>foarte bun si satos</p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191206152835.jpeg','2019-12-06 15:28:35','2019-12-06 15:28:35'),(4,1,NULL,'Paine Romanița','Хлеб Ромашка','Paine Romanița','<p>text ceva ....</p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191206200944.jpeg','2019-12-06 20:09:44','2019-12-06 20:09:44');
+insert  into `products`(`id`,`category_id`,`price`,`name_ro`,`name_ru`,`name_en`,`text_ro`,`text_ru`,`text_en`,`meta_title_ro`,`meta_title_ru`,`meta_title_en`,`meta_keywords_ro`,`meta_keywords_ru`,`meta_keywords_en`,`meta_description_ro`,`meta_description_ru`,`meta_description_en`,`photo`,`created_at`,`updated_at`,`sort`) values (1,1,NULL,'Pâine \"Rotundă\"','Хлеб \"Круглый\"','\"Rotundă\"',NULL,NULL,'<p>verry nice&nbsp;</p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212140602.jpeg','2019-11-30 07:33:54','2019-12-12 14:06:02',2),(2,1,NULL,'Franzela \"Stolicinîi\"','Батон \"Столичный\"','\"Stolicinîi\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212141953.jpeg','2019-12-05 13:21:29','2019-12-12 14:19:53',3),(3,1,NULL,'Pâine \"Albă\"','Хлеб \"Белый\"','\"Albă\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212142243.jpeg','2019-12-06 15:28:35','2019-12-12 14:22:43',4),(4,1,NULL,'Hală \"Minune\"','Хала \"Минуне\"','\"Minune\"','<p>text ceva ....</p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212144449.jpeg','2019-12-06 20:09:44','2019-12-12 14:44:49',5),(5,1,NULL,'Franzela \"Gorodscoi\"','Батон \"Городской\"','\"Gorodskoi\"','<p>Masa neta:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>370 g</strong></p>\r\n<p>Ambalaj:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +/-</p>\r\n<p>&nbsp;</p>','<p>Масса Нетто:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>370 гр.</strong></p>\r\n<p>Упаковка:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>&nbsp; +</strong></p>','<p>net weight:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>370 g.</strong></p>\r\n<p>package:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>+</strong></p>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212103654.jpeg','2019-12-12 08:54:16','2019-12-13 09:29:15',1),(6,1,NULL,'Colac \"Moldovenesc\"','Калач \"Молдавский\"','\"Moldovenesc\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212145059.jpeg','2019-12-12 14:50:59','2019-12-13 09:30:38',NULL),(7,1,NULL,'Pâine \"Codru\"','Хлеб \"Кодру\"','\"Codru\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212145249.jpeg','2019-12-12 14:52:49','2019-12-13 09:31:46',NULL),(8,1,NULL,'Pâine \"De Bălți\"','Хлеб \"Бельцкий\"','\"De Bălți\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212145629.jpeg','2019-12-12 14:56:29','2019-12-12 14:56:29',NULL),(9,1,NULL,'Pâine \"Cu must de cvas\"','Хлеб \"Ку муст де квас\"','\"Cu must de cvas\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212145936.jpeg','2019-12-12 14:59:36','2019-12-12 14:59:36',NULL),(10,1,NULL,'Franzela \"Borodinschii\"','Хлеб \"Бородинский\"','\"Borodinschii\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191212150357.jpeg','2019-12-12 15:03:57','2019-12-13 09:32:31',NULL),(11,1,NULL,'Pâine \"Darnițchii\"','Хлеб \"Дарницкий\"','\"Darnițchii\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213080545.jpeg','2019-12-13 08:05:45','2019-12-13 08:05:45',NULL),(12,1,NULL,'Pâine de Secară \"Cu stafide\"','Хлеб Ржаной с Изюмом','Rye bread with raisin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213093747.jpeg','2019-12-13 08:08:29','2019-12-13 09:39:47',NULL),(13,1,NULL,'Pâine de Secară \"Cu fructe\"','Хлеб Ржаной с Фруктами','Rye bread with  fruits',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213083435.jpeg','2019-12-13 08:34:35','2019-12-13 09:34:13',NULL),(15,1,NULL,'Pâine de Secară \"Semincioară\"','Хлеб Ржаной \"с Семечкой\"','Rye bread with sunflower seeds',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213083929.jpeg','2019-12-13 08:39:29','2019-12-13 09:40:23',NULL),(16,1,NULL,'Colac \"Ceremonial\"','Калач \"Черемониал\"','\"Ceremonial\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213084154.jpeg','2019-12-13 08:41:54','2019-12-13 08:41:54',NULL),(17,1,NULL,'Colac \"Pentru masa\"','Калач \"К столу\"','\"Pentru masa\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213084454.jpeg','2019-12-13 08:44:54','2019-12-13 08:44:54',NULL),(18,1,NULL,'Colac \"Rotund\"','Калач \"Kруглый\"','\"Rotund\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213084604.jpeg','2019-12-13 08:46:04','2019-12-13 08:46:04',NULL),(19,1,NULL,'Foietaj cu magiun','Булочка слоеная c джемом','Puff bun with jam',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213084935.jpeg','2019-12-13 08:49:35','2019-12-13 09:28:16',NULL),(20,1,NULL,'Foietaj cu cascaval','Булочка слоеная с сыром','Pastry puff with cheese',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213085236.jpeg','2019-12-13 08:52:36','2019-12-13 08:52:36',NULL),(21,1,NULL,'Chiflă сu magiun','Булочка с джемом','Bun with jam',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213085558.jpeg','2019-12-13 08:55:58','2019-12-13 08:56:15',NULL),(22,1,NULL,'Chiflă dulce cu mac','Булочка с маком','Bun with poppy seeds',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213085756.jpeg','2019-12-13 08:57:56','2019-12-13 08:57:56',NULL),(23,1,NULL,'Chifla cu stafide','Булочка с изюмом','Bun with raisins',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213085915.jpeg','2019-12-13 08:59:15','2019-12-13 08:59:15',NULL),(24,1,NULL,'Chifla \"Doinița\"','Булочка \"Дойница\"','Bun \"Doinita\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213090055.jpeg','2019-12-13 09:00:55','2019-12-13 09:00:55',NULL),(25,1,NULL,'Chiflă \"Miracol\"','Булочка \"Миракол\"','Bun \"Miracol\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213090301.jpeg','2019-12-13 09:03:01','2019-12-13 09:03:01',NULL),(26,1,NULL,'Chifla \"Big-Mag\"','Булочка \"Биг-Маг\"','Bun \"Big MAG\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213090545.jpeg','2019-12-13 09:05:45','2019-12-13 09:05:45',NULL),(27,1,NULL,'Chifla pentru hot-dog','Булочка для Хот-догов','Bun for Hot dogs',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213090756.jpeg','2019-12-13 09:07:56','2019-12-13 09:07:56',NULL),(28,1,NULL,'Cruasan cu ciocolată/magiun','Круассан с Шоколадом/с Джемом','Chocolate/Jam croissant',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213091148.jpeg','2019-12-13 09:11:48','2019-12-13 09:15:28',NULL),(29,1,NULL,'Rulada de cozonac cu mac','Рулет с Маком','Roll with Poppy seeds',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213091647.jpeg','2019-12-13 09:16:47','2019-12-13 09:16:47',NULL),(30,1,NULL,'Plăcinte in asortiment','Плацинды в ассортименте','Moldavian pie',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213092200.jpeg','2019-12-13 09:22:00','2019-12-13 09:22:00',NULL),(31,2,NULL,'Cracker \"Gingaș\"','Крекер \"Нежный\"','Cracker \"Gingaș\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213095209.jpeg','2019-12-13 09:52:09','2019-12-13 09:52:09',NULL),(32,2,NULL,'Cracker Sărat','Крекер Соленый','Cracker Salty',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213095443.jpeg','2019-12-13 09:54:43','2019-12-13 12:30:40',NULL),(33,2,NULL,'Cracker Deosebit cu Becon','Крекер с беконом \"Деосебит\"','Cracker Bacon \"Deosebit\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213095920.jpeg','2019-12-13 09:59:20','2019-12-13 10:16:08',NULL),(34,2,NULL,'Cracker Deosebit cu Cascaval','Крекер с сыром \"Деосебит\"','Cracker Cheese \"Deosebit\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213100414.jpeg','2019-12-13 10:03:20','2019-12-13 10:04:14',NULL),(35,2,NULL,'Cracker Deosebit cu Sare si Mac','Крекер с солью и маком \"Деосебит\"','Cracker salty with poppy seeds \"Deosebit\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213100643.jpeg','2019-12-13 10:06:43','2019-12-13 10:28:54',NULL),(36,2,NULL,'Cracker Deosebit cu Saleami','Крекер с салями \"Деосебит\"','Cracker Salami \"Deosebit\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213100912.jpeg','2019-12-13 10:09:12','2019-12-13 10:29:25',NULL),(37,2,NULL,'Cracker \"Gingaș\"','Крекер \"Нежный\"','Cracker \"Gingas\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213101532.jpeg','2019-12-13 10:15:32','2019-12-13 10:17:03',NULL),(38,2,NULL,'Cracker \"Ghiocel\"','Крекер \"Гиочел\"','Cracker \"Ghiocel\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213102104.jpeg','2019-12-13 10:21:04','2019-12-13 10:21:04',NULL),(39,2,NULL,'Cracker  DeGusto Margarita','Крекер DeGusto Маргарита','Cracker  DeGusto Margarita',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213102428.jpeg','2019-12-13 10:24:28','2019-12-13 10:30:56',NULL),(40,2,NULL,'Cracker DeGusto Cu Tarîță','Крекер DeGusto Отрубями','Cracker DeGusto With Bran',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213102810.jpeg','2019-12-13 10:28:10','2019-12-13 10:28:10',NULL),(41,2,NULL,'Cracker ZOO Animax','Крекер Зоо Animax','Cracker ZOO Animax',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213103435.jpeg','2019-12-13 10:34:35','2019-12-13 13:32:22',NULL),(42,2,NULL,'Cracker Zoo kg','Крекер Зоо kг','Cracker Zoo kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213103648.jpeg','2019-12-13 10:36:48','2019-12-13 10:36:48',NULL),(43,2,NULL,'Cracker Zoo cu mac','Крекер Зоо с маком','Cracker Zoo with poppy seeds',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213103857.jpeg','2019-12-13 10:38:57','2019-12-13 12:39:15',NULL),(44,2,NULL,'Cracker Cu cacao kg','Крекер с какао kг','Cracker cocoa kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213104142.jpeg','2019-12-13 10:41:42','2019-12-13 10:41:42',NULL),(45,2,NULL,'Cracker Gingaș kg','Крекер Нежный kг','Cracker \"Gingaș\" kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213122307.jpeg','2019-12-13 12:23:07','2019-12-13 12:23:07',NULL),(46,2,NULL,'Cracker Sărat kg','Крекер Соленый kг','Cracker Salty kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213123013.jpeg','2019-12-13 12:30:13','2019-12-13 13:32:46',NULL),(47,2,NULL,'Cracker \"Ghiocel\" kg','Крекер \"Гиочел\" kг','Cracker \"Ghiocel\" kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213123611.jpeg','2019-12-13 12:36:12','2019-12-13 12:38:50',NULL),(48,2,NULL,'Cracker \"Margarita\" kg','Крекер \"Маргарита\" kг','Cracker \"Margarita\" kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213123948.jpeg','2019-12-13 12:37:47','2019-12-13 12:39:48',NULL),(49,2,NULL,'Cracker TV cu Becon, Cascaval, Saleami, Lancemit','Крекер Deosebit  (вкус бекон, сыр, ланчмит, лук, салями)','Cracker difr. flavours, kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213124740.jpeg','2019-12-13 12:47:40','2019-12-13 12:53:06',NULL),(50,2,NULL,'Cracker Deosebit cu becon, cascaval, lancemit, ceapa, saleami','Крекер Особый (вкус бекон, сыр, ланчмит, лук, салями)','Cracker Deosebit dif. flavours',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213125133.jpeg','2019-12-13 12:51:33','2019-12-13 12:51:33',NULL),(52,4,NULL,'DG \"Super\"','DG \"Супер\"','DG \"Super\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213130557.jpeg','2019-12-13 13:05:57','2019-12-13 13:05:57',NULL),(53,4,NULL,'\"Romașca\" kg','Ромашка kг','\"Romașca\" kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213130820.jpeg','2019-12-13 13:08:20','2019-12-13 13:08:20',NULL),(54,4,NULL,'\"Super\" kg','Супер kг','\"Super\" kg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213130950.jpeg','2019-12-13 13:09:50','2019-12-13 13:09:50',NULL),(55,4,NULL,'De ovas Animax classic','Овсяное Анимакс (Классика)','Oatmeal Cookies Animax',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213131450.jpeg','2019-12-13 13:14:50','2019-12-13 13:33:27',NULL),(56,4,NULL,'De ovas Animax cu Susan','Овсяное Анимакс (с кунжутом)','Oatmeal Anime (with sesame)',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213131723.jpeg','2019-12-13 13:17:23','2019-12-13 13:17:23',NULL),(57,4,NULL,'De ovas Animax \"Semincioară\"','Овсяное Анимакс (с семечкой)','Oatmeal Animax (with a seed)',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-12-13 13:20:37','2019-12-13 13:20:37',NULL),(58,4,NULL,'\"Trandafir\"','\"Трандафир\"','\"Trandafir\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213132406.jpeg','2019-12-13 13:24:06','2019-12-13 13:35:05',NULL),(59,4,NULL,'\"De casă\"','Печенье \"Домашнее\"','\"De casă\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213132658.jpeg','2019-12-13 13:25:53','2019-12-13 13:26:58',NULL),(60,4,NULL,'\"Minutca\"','\"Минутка\"','\"Minutca\"',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20191213132810.jpeg','2019-12-13 13:28:10','2019-12-13 13:31:50',NULL);
 
 /*Table structure for table `settings` */
 
@@ -246,8 +248,8 @@ DROP TABLE IF EXISTS `settings`;
 
 CREATE TABLE `settings` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -275,7 +277,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'admin','marin.vartan@gmail.com',NULL,'$2y$10$8ZPBtTkHnR6jCYJ/Uk56NuY7u8onP2iGME7uFcwxJDJBpCsjsq4Mu','BV8UojXQWnpRrfCjnL0sjqxtuo8cylawJxelzBOXZpT9EvmpWdMdpfOPhGv5','2019-11-20 10:40:42','2019-11-20 10:40:42');
+insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'admin','marin.vartan@gmail.com',NULL,'$2y$10$8ZPBtTkHnR6jCYJ/Uk56NuY7u8onP2iGME7uFcwxJDJBpCsjsq4Mu','qypxVcy04w5P2iCgFZmMgRjZsdiNzYyNX9yEA2pgkDmYIunW5DfYYYo7yIlw','2019-11-20 10:40:42','2019-11-20 10:40:42');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
