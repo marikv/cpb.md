@@ -155,13 +155,29 @@
 			},
 			perView() {
 				if (this.images) {
-					return Math.floor(window.innerWidth / 320);
+					if (window.innerWidth <= 400) {
+						return 1;
+					}
+					return Math.ceil(window.innerWidth / 320) - 1;
+					const floor = Math.floor(window.innerWidth / 320);
+					if (floor === 0) {
+						return 1;
+					}
+					return 0;
 				}
 				return 0;
 			},
 			perViewVideo() {
 				if (this.videos) {
-					return Math.floor(window.innerWidth / 420);
+					if (window.innerWidth <= 460) {
+						return 1;
+					}
+					return Math.ceil(window.innerWidth / 420) - 1;
+					const floor = Math.floor(window.innerWidth / 420);
+					if (floor === 0) {
+						return 1;
+					}
+					return 0;
 				}
 				return 0;
 			},
@@ -203,8 +219,8 @@
 		text-align: center;
 		background: rgba(0, 0, 0, 0.43);
 		box-sizing: content-box;
-		border: 2px solid #fff;
-		border-radius: 33px;
+		/*border: 2px solid #fff;*/
+		border-radius: 6px;
 		opacity: .5;
 		cursor: pointer;
 		padding: 10px;

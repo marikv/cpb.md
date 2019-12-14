@@ -127,10 +127,10 @@
 </template>
 
 <script>
-	import menu from './menu';
+	import menuComponent from './menuComponent';
 	export default {
 		components: {
-			menu,
+			menuComponent,
 		},
 		computed: {
 			lang() {

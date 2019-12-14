@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	import menuComponent from './menu';
+	import menuComponent from './menuComponent';
 	export default {
 		components: {
 			menuComponent,
@@ -76,7 +76,7 @@
 <style>
 	#topHeader {
 		position: absolute;
-		z-index: 2;
+		z-index: 3;
 		width: 100%;
 	}
 	.site-navigation-mobile {
