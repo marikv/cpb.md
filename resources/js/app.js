@@ -10,6 +10,13 @@ import VueGlide from 'vue-glide-js';
 import 'vue-glide-js/dist/vue-glide.css';
 Vue.use(VueGlide);
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2, {
+	confirmButtonColor: '#41b882',
+	cancelButtonColor: '#ff7674',
+});
+
 
 Vue.use(VueScrollTo, {
 	container: "body",

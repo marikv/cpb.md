@@ -26,6 +26,7 @@ Route::post('/products/get', 'HomeController@getProducts')->name('getProducts');
 Route::post('/categories/get', 'HomeController@getCategories')->name('getCategories');
 Route::post('/category/get', 'HomeController@getCategory')->name('getCategory');
 Route::post('/articles/get', 'HomeController@getArticles')->name('getArticles');
+Route::post('/contacts/send', 'HomeController@sendMessageFromContacts')->name('sendMessageFromContacts');
 
 
 //Route::get('/', function () {

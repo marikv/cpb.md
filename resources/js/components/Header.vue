@@ -62,7 +62,6 @@
 				return window.settingsData[`logotext_${this.lang}`];
 			},
 			phone1() {
-				console.log(window.settingsData['phone1']);
 				return window.settingsData['phone1'];
 			},
 			phone2() {

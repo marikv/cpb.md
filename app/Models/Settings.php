@@ -41,6 +41,7 @@ class Settings extends Model
             'ico' => '',
             'phone1' => '',
             'phone2' => '',
+            'email' => '',
             'langing_bg_1' => '',
             'langing_bg_2' => '',
             'photoForPhotoGallery' => '',

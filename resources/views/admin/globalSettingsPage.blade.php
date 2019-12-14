@@ -60,6 +60,21 @@
 
         <div class="row justify-content-center content-box">
             <div class="col-md-2">
+                Email
+            </div>
+            <div class="col-md-10">
+                @php
+                    $filedName = 'email';
+                @endphp
+                @include('admin.fields.text')
+            </div>
+        </div>
+
+
+
+
+        <div class="row justify-content-center content-box">
+            <div class="col-md-2">
                 Telefon 1
             </div>
             <div class="col-md-10">

@@ -110,8 +110,8 @@
 							</a>
 						</div>
 						<div class="footer__content-100" style="margin: 10px 0;">
-							<a href="mailto:info@cpb.md">
-								info@cpb.md
+							<a :href="`mailto:${email}`">
+								{{email}}
 							</a>
 						</div>
 						<div class="footer__content-100">
@@ -141,6 +141,9 @@
 			},
 			phone2() {
 				return window.settingsData['phone2'];
+			},
+			email() {
+				return window.settingsData['email'];
 			},
 		},
 		methods: {

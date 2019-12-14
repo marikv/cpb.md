@@ -28,6 +28,7 @@
         "vue-parallaxy": "^1.1.1",
         "vue-scrollto": "^2.17.1",
         "vue-spinner": "^1.0.3",
+        "vue-sweetalert2": "^2.1.5",
         "vue2-google-maps": "^0.10.7"
     }
 }

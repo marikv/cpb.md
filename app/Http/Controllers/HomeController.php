@@ -161,6 +161,26 @@ class HomeController extends Controller
     }
 
 
+    public function sendMessageFromContacts(Request $request)
+    {
+        $text = $request->text;
+        if ($text) {
+            $mail = 'info@cpb.md';
+            $settings = Settings::all();
+            foreach ($settings as $row){
+                if ($row->name == 'email') {
+                    $mail = $row->value;
+                }
+            };
+
+            $details = [
+                'text' => $text,
+                'nume' => $request->nume,
+            ];
+            $m = Mail::to($mail)->send(new \App\Mail\SendMailContacts($details));
+        }
+    }
+
     public function sendCerere(Request $request)
     {
         $phone = $request->phone;
