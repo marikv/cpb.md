@@ -26,7 +26,7 @@
 					
 					<nav role='navigation' class="site-navigation-mobile">
 						<div id="menuMobileToggle">
-							<input type="checkbox" />
+							<input type="checkbox" id="menuMobileToggleCheckbox" />
 							<span></span>
 							<span></span>
 							<span></span>

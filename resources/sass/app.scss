@@ -485,69 +485,7 @@ h1, h2 {
   text-align: center;
   padding-top: 60px;
 }
-.glide div[data-glide-el="controls"] {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-}
-.glide div[data-glide-el="controls"] button:active,
-.glide div[data-glide-el="controls"] button:focus {
-  outline: none;
-}
-.glide div[data-glide-el="controls"] button {
-  position: absolute;
-  top: 50%;
-  width: 40px;
-  height: 40px;
-  margin-top: -23px;
-  font-size: 60px;
-  font-weight: 100;
-  line-height: 30px;
-  text-decoration: none;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.43);
-  box-sizing: content-box;
-  border: 2px solid #fff;
-  border-radius: 33px;
-  opacity: .5;
-  cursor: pointer;
-  padding: 10px;
-}
-.glide div[data-glide-el="controls"] button:hover {
-  opacity: .8;
-}
-.glide div[data-glide-el="controls"] button[data-glide-dir=">"] {
-  right: 10px;
-}
-.glide div[data-glide-el="controls"] button[data-glide-dir="<"] {
-  left: 10px;
-}
-.glide .glide__bullets{
-  margin-top: -10px;
-  margin-bottom: 20px;
-}
-.glide .glide__bullet:active,
-.glide .glide__bullet:hover,
-.glide .glide__bullet:focus {
-  outline: none;
-}
-.glide .glide__bullet {
-  background-color: #ffffff;
-  border-radius: 10px;
-  width: 10px !important;
-  height: 10px !important;
-  border: 1px solid rgba(9,9,121,0.9);
-  display: inline-block;
-  padding: 0;
-  margin: 0 5px 0 0;
-  cursor: pointer;
-}
-.glide .glide__bullet.glide__bullet--active {
-  //background-color: #9f9f9f;
-  background: -moz-linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(9,9,121,0.7) 100%);
-  background: -webkit-linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(9,9,121,0.7) 100%);
-  background: linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(9,9,121,0.7) 100%);
-}
+
 .slide-image {
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);
   background-size: cover;

@@ -1,5 +1,5 @@
 <template>
-		<ul :id="id" class="site-menu">
+		<ul :id="id" class="site-menu" @click="menuClick">
 			<li>
 				<router-link :to="{ name: 'LandingPage', hash: '#topHeader' }" v-scroll-to="{el: '#topHeader'}">
 					<span v-if="lang === 'ro'">Despre noi</span>
@@ -72,6 +72,9 @@
 			setLang(lang) {
 				this.showLangs = false;
 				this.$store.commit('setLang', lang);
+			},
+			menuClick() {
+				document.getElementById('menuMobileToggleCheckbox').checked = !document.getElementById('menuMobileToggleCheckbox').checked;
 			},
 		},
 	}

@@ -59,9 +59,17 @@
 						this.$store.commit('setShowSpinner', false);
 					});
 			},
+			updateParalaxHeight() {
+				const el2 = document.getElementById('paralax__wrapper');
+				if (el2) {
+					el2.style.height = '100vh';
+					document.getElementById('paralax-home').style.height = '100vh';
+				}
+			},
 		},
 		mounted() {
 			this.loadCategories();
+			this.updateParalaxHeight();
 		}
 	}
 </script>
