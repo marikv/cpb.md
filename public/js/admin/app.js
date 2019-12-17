@@ -4,6 +4,17 @@ $.ajaxSetup({
 	}
 });
 
+function readURL(input, n) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#'+n+'_img').attr('src', e.target.result);
+		};
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+
 var saveImage = function(name) {
 	saveSettings(name, $('#' + name + 'Hidden').val(), function () {
 		var $desc = $('#' + name + 'Desc');

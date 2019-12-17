@@ -148,6 +148,22 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function getPageContent(Request $request)
+    {
+        $pageData = Page::find($request->id);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'pageData' => $pageData,
+            ]
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getProducts(Request $request)
     {
         $productsData = Product::where('category_id', $request->category_id)->orderBy('sort', 'ASC')->get();

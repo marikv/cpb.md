@@ -29,6 +29,13 @@
 				</router-link>
 			</li>
 			<li>
+				<router-link to="/custom-products">
+					<span v-if="lang === 'ro'">Produse la comandă</span>
+					<span v-if="lang === 'ru'">Продукция на заказ</span>
+					<span v-if="lang === 'en'">Custom products</span>
+				</router-link>
+			</li>
+			<li>
 				<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
 					<span v-if="lang === 'ro'">Contacte</span>
 					<span v-if="lang === 'ru'">Контакты</span>
@@ -37,7 +44,10 @@
 			</li>
 			<li>
 				<a href="javascript:void(0)" @click.stop.prevent="showLangs=!showLangs">
-					<div class="lang-item"><img class="flag" :src="`/img/${lang}.svg`"> {{langName}}</div>
+					<div class="lang-item">
+						<img class="flag" :src="`/img/${lang}.svg`">
+<!--						{{langName}}-->
+					</div>
 				</a>
 				<div class="langs-container" v-show="showLangs">
 					<div class="lang-item" v-show="lang!=='ro'" @click="setLang('ro')"><img class="flag" src="/img/ro.svg"> Ro</div>

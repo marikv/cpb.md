@@ -583,6 +583,20 @@ h1, h2 {
   font-weight: 200;
   margin-bottom: 30px;
 }
+.text-center {
+  text-align: center;
+}
+a.article__title {
+  cursor: pointer;
+}
+.article {
+  clear: both;
+  margin: 0 0 80px 0;
+  font-weight: 200;
+}
+.bg-contain {
+  background-size: contain !important;
+}
 .read-more-link {
   font-weight: bold;
   color: #003176;
@@ -594,6 +608,7 @@ h1, h2 {
   font-size: 18px;
   line-height: 28px;
   color: #747373;
+  font-weight: 200;
 }
 .category-back {
   height: 30px;

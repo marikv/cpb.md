@@ -108,19 +108,10 @@
                                 <a class="nav-link" href="/admin/page/news">Noutăți</a>
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown2"
-                                   class="nav-link dropdown-toggle"
-                                   href="#"
-                                   role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   aria-expanded="false"
-                                >
-                                    Contacte <span class="caret"></span>
-                                </a>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/produseLaComanda">Produse La Comandă</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin/page/simplePage?id=1&edit=1">Lista Magazinelor</a>
                             </li>

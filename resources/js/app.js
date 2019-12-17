@@ -38,6 +38,7 @@ import Article from './components/News/Article';
 import Categories from './components/Products';
 import Category from './components/Products/ProductsList';
 import Product from './components/Products/Product';
+import CustomProducts from './components/Pages/CustomProducts';
 
 
 Vue.use(VueRouter);
@@ -51,6 +52,11 @@ const router = new VueRouter({
 		{
 			path: '/news',
 			component: News,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/custom-products',
+			component: CustomProducts,
 			meta: { scrollToTop: true },
 		},
 		{

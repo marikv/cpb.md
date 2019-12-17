@@ -17,6 +17,7 @@
 Route::get('/', 'HomeController@landingPage')->name('landingPage');
 Route::get('/categories', 'HomeController@landingPage')->name('landingPageCategories');
 Route::get('/news', 'HomeController@landingPage')->name('landingPageArticles');
+Route::get('/custom-products', 'HomeController@landingPage')->name('landingPageCiustomProducts');
 
 Route::get('/ro', 'HomeController@landingPageRo')->name('landingPageRo');
 Route::get('/ru', 'HomeController@landingPageRu')->name('landingPageRu');
@@ -27,7 +28,7 @@ Route::post('/categories/get', 'HomeController@getCategories')->name('getCategor
 Route::post('/category/get', 'HomeController@getCategory')->name('getCategory');
 Route::post('/articles/get', 'HomeController@getArticles')->name('getArticles');
 Route::post('/contacts/send', 'HomeController@sendMessageFromContacts')->name('sendMessageFromContacts');
-
+Route::get('/pages/get/{id}', 'HomeController@getPageContent')->name('getPageContent')->where('id', '[0-9]+');
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -41,8 +42,14 @@ Route::get('/register', 'AdminController@index')->name('registerAdmin');
 Route::get('/home', 'AdminController@index')->name('homeAdmin');
 
 Route::post('/admin/sort/edit', 'AdminController@sortEdit')->name('sortEdit');
+
 Route::post('/admin/simplePage/save', 'AdminController@simplePageSave')->name('simplePageSave');
 Route::get('/admin/page/simplePage', 'AdminController@simplePage')->name('simplePage');
+
+Route::post('/admin/produseLaComanda/save', 'AdminController@produseLaComandaSave')->name('produseLaComandaSave');
+Route::get('/admin/page/produseLaComanda', 'AdminController@produseLaComanda')->name('produseLaComanda');
+
+
 Route::get('/admin/page/products', 'AdminController@productsPage')->name('productsPage');
 Route::get('/admin/page/settings', 'AdminController@globalSettingsPage')->name('globalSettingsPage');
 Route::get('/admin/page/landing', 'AdminController@landingPage')->name('landingPageAdmin');

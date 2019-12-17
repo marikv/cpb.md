@@ -39,6 +39,13 @@
 						</router-link>
 					</div>
 					<div class="footer__content-100" style="margin-bottom: 15px;">
+						<router-link to="/custom-products">
+							<span v-if="lang === 'ro'">Produse la comandă</span>
+							<span v-if="lang === 'ru'">Продукция на заказ</span>
+							<span v-if="lang === 'en'">Custom products</span>
+						</router-link>
+					</div>
+					<div class="footer__content-100" style="margin-bottom: 15px;">
 						<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
 							<span v-if="lang === 'ro'">Contacte</span>
 							<span v-if="lang === 'ru'">Контакты</span>

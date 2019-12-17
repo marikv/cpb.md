@@ -78,9 +78,13 @@
 		position: absolute;
 		z-index: 3;
 		width: 100%;
+		font-weight: 200;
 	}
 	.site-navigation-mobile {
 		display: block;
+	}
+	#menuDesktop {
+		padding: 0;
 	}
 	#menuMobileToggle{
 		display: block;
