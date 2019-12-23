@@ -38,8 +38,8 @@
 								<div class="modal">
 									<img src="/img/cancel.svg" class="modal-close" @click.self="isOpen = false;"/>
 									
-									<h1 class="article__title">{{ activeItem[`name_${lang}`] }}</h1>
-									<div class="article__text" v-html="activeItem[`text_${lang}`]"></div>
+									<h1 class="article__title">{{ getArticleTitle }}</h1>
+									<div class="article__text" v-html="getArticleHtml"></div>
 								
 								</div>
 							</div>
@@ -71,6 +71,12 @@
 		computed: {
 			lang() {
 				return this.$store.getters.getLang;
+			},
+			getArticleHtml() {
+				return this.activeItem && this.activeItem[`text_${this.lang}`] ? this.activeItem[`text_${this.lang}`] : '';
+			},
+			getArticleTitle() {
+				return this.activeItem && this.activeItem[`name_${this.lang}`] ? this.activeItem[`name_${this.lang}`] : '';
 			},
 		},
 		methods: {
