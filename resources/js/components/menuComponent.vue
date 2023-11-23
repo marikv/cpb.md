@@ -9,8 +9,8 @@
 			</li>
 			<li>
 				<router-link :to="{ name: 'LandingPage', hash: '#PhotoGallery' }"  >
-					<span v-if="lang === 'ro'">Galeria Noastră</span>
-					<span v-if="lang === 'ru'">Наша галерея</span>
+					<span v-if="lang === 'ro'">Galeria<br>Noastră</span>
+					<span v-if="lang === 'ru'">Наша<br>галерея</span>
 					<span v-if="lang === 'en'">Our Gallery</span>
 				</router-link>
 			</li>
@@ -30,11 +30,18 @@
 			</li>
 			<li>
 				<router-link to="/custom-products">
-					<span v-if="lang === 'ro'">Produse la comandă</span>
-					<span v-if="lang === 'ru'">Продукция на заказ</span>
-					<span v-if="lang === 'en'">Custom products</span>
+					<span v-if="lang === 'ro'">Produse la<br>comandă</span>
+					<span v-if="lang === 'ru'">Продукция<br>на заказ</span>
+					<span v-if="lang === 'en'">Custom<br>products</span>
 				</router-link>
 			</li>
+            <li>
+                <router-link to="/vacancies">
+                    <span v-if="lang === 'ro'">Locuri<br>vacante</span>
+                    <span v-if="lang === 'ru'">Вакансии</span>
+                    <span v-if="lang === 'en'">Vacancies</span>
+                </router-link>
+            </li>
 			<li>
 				<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
 					<span v-if="lang === 'ro'">Contacte</span>
@@ -59,7 +66,7 @@
 </template>
 
 <script>
-	
+
 	export default {
 		props: ['id'],
 		data() {
@@ -94,7 +101,7 @@
 	.site-navigation-mobile {
 		display: block;
 	}
-	
+
 	.flag {
 		height: 14px;
 		margin-right: 5px;

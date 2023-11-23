@@ -113,6 +113,10 @@
                             </li>
 
                             <li class="nav-item">
+                                <a class="nav-link" href="/admin/page/vacancies">Posturi vacante</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="/admin/page/simplePage?id=1&edit=1">Lista Magazinelor</a>
                             </li>
 

@@ -54,8 +54,29 @@ class AdminController extends Controller
     {
         $settingsData = Settings::getAll();
         $data = Page::where('id', 2)->first();
+        if (empty($data)) {
+            $data = new Page();
+            $data->id = 2;
+            $data->save();
+        }
 
         return view('admin.produseLaComanda')->with('settingsData', $settingsData)->with('data', $data);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function vacancies()
+    {
+        $settingsData = Settings::getAll();
+        $data = Page::where('id', 3)->first();
+        if (empty($data)) {
+            $data = new Page();
+            $data->id = 3;
+            $data->save();
+        }
+
+        return view('admin.vacancies')->with('settingsData', $settingsData)->with('data', $data);
     }
 
     /**
@@ -209,6 +230,52 @@ class AdminController extends Controller
         $model->save();
 
         return redirect('/admin/page/produseLaComanda');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function vacanciesSave(Request $request)
+    {
+        $model = Page::firstOrNew(array('id' => 3));
+
+        if($request->file('photo')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'_'.uniqid().'.'.$request->file('photo')->extension();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $model->photo = $fileName;
+        }
+        if($request->file('photo1')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'_'.uniqid().'.'.$request->file('photo1')->extension();
+            $request->file('photo1')->move(public_path('uploads'), $fileName);
+            $model->photo1 = $fileName;
+        }
+        if($request->file('photo2')) {
+            $request->validate([
+                'file' => 'mimes:jpg,jpeg,png,gif,ico,bmp|max:20480',
+            ]);
+            $fileName = date('YmdHis').'_'.uniqid().'.'.$request->file('photo2')->extension();
+            $request->file('photo2')->move(public_path('uploads'), $fileName);
+            $model->photo2 = $fileName;
+        }
+
+        $model->name_ro = $request->name_ro;
+        $model->name_ru = $request->name_ru;
+        $model->name_en = $request->name_en;
+
+        $model->text_ro = $request->text_ro;
+        $model->text_ru = $request->text_ru;
+        $model->text_en = $request->text_en;
+
+        $model->save();
+
+        return redirect('/admin/page/vacancies');
     }
 
     public function sortEdit(Request $request)

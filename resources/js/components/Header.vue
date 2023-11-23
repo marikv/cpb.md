@@ -1,6 +1,6 @@
 <template>
 	<div id="topHeader">
-		
+
 		<div class="top-header">
 			<div class="container">
 				<div class="flex" style="justify-content: space-between;">
@@ -23,7 +23,7 @@
 							<menuComponent id="menuDesktop"></menuComponent>
 						</nav>
 					</div>
-					
+
 					<nav role='navigation' class="site-navigation-mobile">
 						<div id="menuMobileToggle">
 							<input type="checkbox" id="menuMobileToggleCheckbox" />
@@ -33,8 +33,8 @@
 							<menuComponent id="menuMobile"></menuComponent>
 						</div>
 					</nav>
-					
-					
+
+
 				</div>
 			</div>
 		</div>
@@ -217,33 +217,35 @@
 		width: calc(100% - 200px);
 		display: none;
 	}
-	
+
 	.site-navbar .site-navigation .site-menu > li {
 		display: inline-block;
 	}
-	
+
 	.site-navbar .site-navigation .site-menu .active {
 		color: #003176;
 		display: inline-block;
 		padding: 5px 20px;
 	}
-	
+
 	.site-navbar .site-navigation .site-menu > li > a {
 		padding: 5px 20px;
 		color: #000;
-		display: inline-block;
+		//display: inline-block;
 		text-decoration: none !important;
+        display: flex;
+        text-align: left;
 	}
-	
+
 	.site-navbar .site-navigation .site-menu > li > a:hover {
 		color: #003176;
 	}
-	
+
 	.site-navbar .site-navigation .site-menu a {
 		text-decoration: none !important;
 		display: inline-block;
 	}
-	
+
 	@media (max-width: 550px) {
 		.phones {
 			width: 180px;
@@ -261,7 +263,7 @@
 		.site-navbar {
 			display: block;
 		}
-		
+
 		.logo a img {
 			position: absolute;
 			top: -10px;
@@ -270,7 +272,7 @@
 		.top-header {
 			height: auto;
 		}
-		
+
 		.site-navigation-mobile {
 			display: none;
 		}

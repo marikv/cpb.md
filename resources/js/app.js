@@ -39,6 +39,7 @@ import Categories from './components/Products';
 import Category from './components/Products/ProductsList';
 import Product from './components/Products/Product';
 import CustomProducts from './components/Pages/CustomProducts';
+import SimplePage from "./components/Pages/SimplePage.vue";
 
 
 Vue.use(VueRouter);
@@ -57,6 +58,11 @@ const router = new VueRouter({
 		{
 			path: '/custom-products',
 			component: CustomProducts,
+			meta: { scrollToTop: true },
+		},
+		{
+			path: '/vacancies',
+			component: SimplePage,
 			meta: { scrollToTop: true },
 		},
 		{

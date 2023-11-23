@@ -17,7 +17,8 @@
 Route::get('/', 'HomeController@landingPage')->name('landingPage');
 Route::get('/categories', 'HomeController@landingPage')->name('landingPageCategories');
 Route::get('/news', 'HomeController@landingPage')->name('landingPageArticles');
-Route::get('/custom-products', 'HomeController@landingPage')->name('landingPageCiustomProducts');
+Route::get('/custom-products', 'HomeController@landingPage')->name('landingPageCustomProducts');
+Route::get('/vacancies', 'HomeController@landingPage')->name('landingPageVacancies');
 
 Route::get('/ro', 'HomeController@landingPageRo')->name('landingPageRo');
 Route::get('/ru', 'HomeController@landingPageRu')->name('landingPageRu');
@@ -48,6 +49,9 @@ Route::get('/admin/page/simplePage', 'AdminController@simplePage')->name('simple
 
 Route::post('/admin/produseLaComanda/save', 'AdminController@produseLaComandaSave')->name('produseLaComandaSave');
 Route::get('/admin/page/produseLaComanda', 'AdminController@produseLaComanda')->name('produseLaComanda');
+
+Route::post('/admin/vacancies/save', 'AdminController@vacanciesSave')->name('vacanciesSave');
+Route::get('/admin/page/vacancies', 'AdminController@vacancies')->name('vacancies');
 
 
 Route::get('/admin/page/products', 'AdminController@productsPage')->name('productsPage');

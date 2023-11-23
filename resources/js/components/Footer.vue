@@ -1,12 +1,12 @@
 <template>
 	<div id="footer">
 		<footer class="footer">
-			
-			
+
+
 			<div class="container">
-				
+
 				<div>
-					
+
 					<div class="footer__content-100" style="margin-bottom: 15px;">
 						<router-link :to="{ name: 'LandingPage', hash: '#topHeader' }" v-scroll-to="{el: '#topHeader'}">
 							<span v-if="lang === 'ro'">Despre noi</span>
@@ -46,13 +46,20 @@
 						</router-link>
 					</div>
 					<div class="footer__content-100" style="margin-bottom: 15px;">
+						<router-link to="/vacancies">
+							<span v-if="lang === 'ro'">Locuri vacante</span>
+                            <span v-if="lang === 'ru'">Вакансии</span>
+							<span v-if="lang === 'en'">Vacancies</span>
+						</router-link>
+					</div>
+					<div class="footer__content-100" style="margin-bottom: 15px;">
 						<router-link :to="{ name: 'LandingPage', hash: '#Contacts' }" v-scroll-to="{el: '#Contacts'}">
 							<span v-if="lang === 'ro'">Contacte</span>
 							<span v-if="lang === 'ru'">Контакты</span>
 							<span v-if="lang === 'en'">Contacts</span>
 						</router-link>
 					</div>
-					
+
 					<div v-if="lang === 'ru'" class="footer__title">
 						<!--					Время работы-->
 					</div>
@@ -87,12 +94,12 @@
 				<div style="text-align: center">
 					<div v-if="lang === 'ru'" class="footer__title">Адрес</div>
 					<div v-else class="footer__title">Adresa</div>
-					
+
 					<div class="footer__content">
 						<div class="footer__content-100" style="margin-bottom: 15px;">
 							or. Bălți, str.Stefan cel Mare 111
 						</div>
-						
+
 						<div class="footer__langs-container">
 							<div class="footer__lang-item" :class="{'active': lang === 'ro'}" @click="setLang('ro')">
 								<img class="flag" src="/img/ro.svg"></div>
@@ -101,7 +108,7 @@
 							<div class="footer__lang-item" :class="{'active': lang === 'en'}" @click="setLang('en')">
 								<img class="flag" src="/img/en.svg"></div>
 						</div>
-					
+
 					</div>
 				</div>
 				<div style="text-align: right">
@@ -174,7 +181,7 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	#footer .footer__lang-item {
 		padding: 2px;
 		border: 1px solid transparent;
@@ -186,48 +193,48 @@
 		margin-top: 10px;
 		cursor: pointer;
 	}
-	
+
 	#footer .footer__lang-item.active {
 		border: 1px solid white;
 	}
-	
+
 	#footer .footer__lang-item .flag {
 		width: 18px;
 		height: 15px;
 		margin: 2px;
 	}
-	
+
 	#footer footer {
 	    background: #15304E;
 		background: linear-gradient(90deg, rgba(2, 0, 36, 0.8) 0%, rgba(9, 9, 121, 0.8) 35%, rgba(0, 116, 140, 0.8) 100%);
 		color: white;
 		padding: 80px 20px 80px 20px;
 	}
-	
+
 	#footer .footer__title {
 		font-size: 16px;
 		font-weight: bold;
 		margin-bottom: 30px;
 	}
-	
+
 	#footer .footer__content {
 		display: flex;
 		flex-wrap: wrap;
 		margin-bottom: 30px;
 	}
-	
+
 	#footer .footer__content-name {
 		width: 50%;
 	}
-	
+
 	#footer .footer__content-value {
 		width: 50%;
 	}
-	
+
 	#footer .footer__content-100 {
 		width: 100%;
 	}
-	
+
 	#footer a,
 	#footer a:visited,
 	#footer a:link,
@@ -236,7 +243,7 @@
 		text-decoration: none;
 		border-bottom: 1px dashed white;
 	}
-	
+
 	#footer a.a-img,
 	#footer a.a-img:link,
 	#footer a.a-img:visited,
@@ -245,23 +252,23 @@
 		margin: 7px 10px 0 0;
 		display: inline-block;
 	}
-	
+
 	#footer footer .container {
 		display: flex;
 		flex-wrap: wrap;
 	}
-	
+
 	#footer footer .container > div {
 		width: 100%;
 		float: left;
 	}
-	
+
 	@media (min-width: 1155px) {
 		#footer footer {
 			padding: 100px 0 80px 0;
 		}
 	}
-	
+
 	@media (min-width: 768px) {
 		#footer footer .container > div {
 			width: 33.33%;
